@@ -20,5 +20,7 @@ use App\User;
 
 Route::group(['prefix' => 'internon'], function(){
     Route::post('auth','AuthController@authenticate');
-
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::get('auth/me','AuthController@getAuthenticatedUser');
+    });
 });
