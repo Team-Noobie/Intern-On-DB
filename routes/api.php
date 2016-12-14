@@ -17,10 +17,8 @@ use App\User;
 //     return $request->user();
 // })->middleware('auth:api');
 
-Route::post('auth','AuthController@authenticate');
 
 Route::group(['prefix' => 'internon'], function(){
-    Route::get('user',function(){
-        return User::all();
-    });
+    Route::post('auth','AuthController@authenticate');
+
 });
