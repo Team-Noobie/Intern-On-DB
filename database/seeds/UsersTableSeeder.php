@@ -12,9 +12,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->name = 'Alex';
         $user->email = 'alex@gmail.com';
         $user->password = bcrypt('secret');
+        $user->type = 'student';
         $user->save();
     }
 }
