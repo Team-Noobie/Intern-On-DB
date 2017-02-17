@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $table = 'tbl_user';
-    protected $fillable = [
+    protected $fillable = [ 
         'email', 'password','type',
     ];
 
@@ -27,4 +27,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function student()
+    {
+        return $this->hasOne('App\Models\User_Student');
+    }
 }
