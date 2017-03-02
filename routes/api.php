@@ -32,9 +32,7 @@ Route::group(['prefix' => 'internon'], function(){
 
 
         Route::resource('ads', 'Controllers\Ads_Controller');
-        Route::resource('message','Controllers\Message_Controller');
-        Route::resource('application','Controllers\Message_Controller');
-
+        Route::resource('application','Controllers\Application_Controller');
 
     });
 });

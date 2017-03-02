@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+
         Schema::create('tbl_user', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email')->unique();
@@ -44,7 +45,7 @@ class CreateUsersTable extends Migration
         });
 
 
-        Schema::create('tbl_company_ads', function (Blueprint $table) {
+        Schema::create('tbl_advertisement', function (Blueprint $table) {
 			$table->increments('ads_id');
 			$table->string('company_id',255);
             $table->string('ads_title',255);
@@ -57,24 +58,7 @@ class CreateUsersTable extends Migration
 			$table->timestamps();
 		});
 
-        Schema::create('tbl_company_interns', function (Blueprint $table) {
-			$table->increments('ID');
-			$table->string('company_id',255)->unique();
-			$table->string('student_id',255);
-			$table->string('date_started',255);
-			$table->string('date_finished',255);
-			
-			$table->timestamps();
-		});
-
-
-         Schema::create('tbl_coordinator_students', function (Blueprint $table) {
-			$table->increments('ID');
-			$table->string('student_id',255)->unique();
-			$table->string('coordinator_id',255);
-			
-			$table->timestamps();
-		});
+        
 
          Schema::create('tbl_application', function (Blueprint $table) {
 			$table->increments('application_id');
@@ -84,6 +68,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 			
 		});
+
+        
          
          Schema::create('tbl_application_schedule', function (Blueprint $table) {
 			$table->increments('ID');
@@ -94,13 +80,17 @@ class CreateUsersTable extends Migration
 			$table->string('application_schedule_location',255);
 			$table->string('application_schedule_type_of_interview',255);
 		    $table->timestamps();
-            
 		});
-
-
-
-
-
+    
+        Schema::create('tbl_company_interns', function (Blueprint $table) {
+			$table->increments('ID');
+			$table->string('company_id',255)->unique();
+			$table->string('student_id',255);
+			$table->string('date_started',255);
+			$table->string('date_finished',255);
+			
+			$table->timestamps();
+		});
 
 
     }
@@ -116,11 +106,9 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('tbl_user_company');
         Schema::dropIfExists('tbl_user_coordinator');
         Schema::dropIfExists('tbl_user_student');
-        Schema::dropIfExists('tbl_company_ads');
-        Schema::dropIfExists('tbl_company_interns');
-        Schema::dropIfExists('tbl_coordinator_students');
+        Schema::dropIfExists('tbl_advertisement');
         Schema::dropIfExists('tbl_application');
         Schema::dropIfExists('tbl_application_schedule');
-  
+        Schema::dropIfExists('tbl_company_interns');
     }
 }

@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 
-use App\User;
-use App\Models\User_Student;
+use App\Models\Application;
+use App\Models\Company_Ads;
 
-class User_Controller extends Controller
+class Application_Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,6 +18,7 @@ class User_Controller extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -41,23 +40,25 @@ class User_Controller extends Controller
     public function store(Request $request)
     {
         //
-        
-        $user = new User;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->type = $request->type;
-
-        $user->save();
-
-        if($request->type == 'student'){
-            $student = new User_Student;
-            $student->student_name = $request->lastname. ", ".$request->firstname;
-            $student->user_ID = $user->id;
-            $student->save();
+        if($request->user=='student' && $request->type=='apply'){
+            $app = new Application;
+            $ad = Company_Ads::find($request->ad_id);
+            
+            $app->ads_id=$request->ad_id;
+            $app->company_id=$ad->company_id;
+            $app->student_id=$request->student_id;
+            $app->save();
+                return response()->json($request);
         }
 
-
-        return response()->json($user);
+        if($request->user=='company' && $request->type=='show_applications'){
+            $query = Application::where('company_id',$request->id)->get();
+            $apps = new \stdClass();
+            foreach($query as $app => $value){
+                $apps->$app = $value;
+            }
+            return response()->json($apps);
+        }
     }
 
     /**
@@ -69,27 +70,6 @@ class User_Controller extends Controller
     public function show($id)
     {
         //
-        $user = User::find($id);
-        
-        if($user->type == "student"){
-            $student = DB::table('tbl_user')
-                ->join('tbl_user_student','tbl_user.id','=','tbl_user_student.user_ID')
-                ->select('tbl_user_student.student_name','tbl_user.email')
-                ->where('tbl_user.id',$id)
-                ->get();
-                return response()->json($student);
-        }
-        
-        if($user->type == "company"){
-            $company = DB::table('tbl_user')
-                ->join('tbl_user_company','tbl_user.id','=','tbl_user_company.user_ID')
-                ->select('tbl_user_company.company_name','tbl_user.email')
-                ->where('tbl_user.id',$id)
-                ->get();
-                return response()->json($company);
-        }
-
-        
     }
 
     /**
@@ -113,7 +93,6 @@ class User_Controller extends Controller
     public function update(Request $request, $id)
     {
         //
-        return response()->json("Updated");
     }
 
     /**
@@ -125,6 +104,5 @@ class User_Controller extends Controller
     public function destroy($id)
     {
         //
-        return response()->json("Deleted");
     }
 }
