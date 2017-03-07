@@ -8,4 +8,5 @@ class Application extends Model
 {
     //
     protected $table = 'tbl_application';
+    protected $primaryKey = 'application_id';
 }

@@ -50,10 +50,11 @@ class Ads_Controller extends Controller
             $ad = new Company_Ads;
             $ad->company_id = $request->id;
             $ad->ads_title = $request->ad_title;
-            $ad->ads_description = $request->ad_description;
+            $ad->ads_requirement = implode(",",$request->ad_requirements);
             $ad->ads_tags = $request->ad_tags;
-            $ad->ads_qualification = $request->ad_qualification;
-            $ad->ads_requirement = $request->ad_requirement;
+            $ad->ads_responsibility = implode(",",$request->ad_responsibilities);
+            $ad->ads_contact = implode(",",$request->ad_contacts);
+            $ad->ads_visibility = "Visible";
             $ad->save();
                 return response()->json($request);
         }
@@ -93,6 +94,9 @@ class Ads_Controller extends Controller
                 foreach($query as $ad => $value){
                     $ads->$ad = $value;
                 }
+                $ads->$ad->ads_requirement = explode(",",$ads->$ad->ads_requirement);
+                $ads->$ad->ads_responsibility = explode(",",$ads->$ad->ads_responsibility);
+                $ads->$ad->ads_contact = explode(",",$ads->$ad->ads_contact);
                 return response()->json($ads);
     }
 

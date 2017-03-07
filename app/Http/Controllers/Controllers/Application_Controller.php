@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Application;
 use App\Models\Company_Ads;
@@ -59,6 +60,28 @@ class Application_Controller extends Controller
             }
             return response()->json($apps);
         }
+
+        if($request->user=='student' && $request->type=='show_applications'){
+            // $query = Application::where('student_id',$request->id)->get();
+            // $apps = new \stdClass();
+            // foreach($query as $app => $value){
+            //     $apps->$app = $value;
+            // }
+            // return response()->json($apps);
+
+            $query = DB::table('tbl_application')
+                ->join('tbl_advertisement','tbl_application.ads_id','=','tbl_advertisement.ads_id')
+                ->join('tbl_user_company','tbl_application.company_id','=','tbl_user_company.user_ID')
+                ->select('*')
+                ->where('tbl_application.student_id',$request->id)
+                ->get();
+                $apps = new \stdClass();
+                foreach($query as $ap => $value){
+                    $apps->$ap = $value;
+                }
+                return response()->json($apps);
+
+        }
     }
 
     /**
@@ -70,6 +93,20 @@ class Application_Controller extends Controller
     public function show($id)
     {
         //
+        // $query = Application::where('ads_id',$id)->get();
+
+        $query = DB::table('tbl_application')
+                ->join('tbl_user_student','tbl_application.student_id','=','tbl_user_student.user_ID')
+                ->select('*')
+                ->where('tbl_application.ads_id',$id)
+                ->get();
+
+
+        $applications = new \stdClass();
+                foreach($query as $ap => $value){
+                    $applications->$ap = $value;
+                }
+        return response()->json($applications);
     }
 
     /**
