@@ -19,6 +19,20 @@ use App\User;
 
 
 Route::group(['prefix' => 'internon'], function(){
-    Route::post('auth','AuthController@authenticate');
+    Route::post('register','Controllers\User_Controller@store');
+    Route::post('auth','Auth\AuthController@authenticate');
+    
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::get('auth','Auth\AuthController@getAuthenticatedUser');
+        
+        // user
+        Route::get('register/{id}','Controllers\User_Controller@show');
+        Route::put('register/{id}', 'Controllers\User_Controller@update');
+        Route::delete('register/{id}','Controllers\User_Controller@destroy');
 
+
+        Route::resource('ads', 'Controllers\Ads_Controller');
+        Route::resource('application','Controllers\Application_Controller');
+
+    });
 });
