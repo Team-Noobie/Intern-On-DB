@@ -9,4 +9,6 @@ class Company_Ads extends Model
     //
     protected $table = 'tbl_advertisement';
     protected $primaryKey = 'ads_id';
+    
+    
 }

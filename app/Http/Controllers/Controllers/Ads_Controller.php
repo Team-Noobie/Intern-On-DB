@@ -64,9 +64,14 @@ class Ads_Controller extends Controller
 
         if($request->type == 'show'){
             $query = Company_Ads::where('company_id',$request->id)->get();
-            // $ads1 = array($ads);
             $ads = new \stdClass();
             foreach($query as $ad => $value){
+                $count = DB::table('tbl_advertisement')
+                ->join('tbl_application','tbl_advertisement.ads_id','=','tbl_application.ads_id')
+                ->select('*')
+                ->where('tbl_advertisement.ads_id',$value->ads_id)
+                ->count();
+                $value->application_count = $count;
                 $ads->$ad = $value;
             }
             return response()->json($ads);
