@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
+
 
 use Illuminate\Database\Eloquent\Model;
 
 class User_Coordinator extends Model
 {
     //
+        protected $table = 'tbl_user_coordinator';
 }

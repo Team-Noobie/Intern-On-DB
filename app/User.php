@@ -28,8 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function student()
-    {
-        return $this->hasOne('App\Models\User_Student');
+
+    public function student(){
+        return $this->hasOne('App\Models\User_Student','user_ID','id');
+    }
+    public function company(){
+        return $this->hasOne('App\Models\User_Company','user_ID','id');
     }
 }

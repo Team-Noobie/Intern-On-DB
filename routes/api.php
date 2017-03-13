@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Adverstisement;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,26 +15,29 @@ use App\User;
 |
 */
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:api');
+// Route::get('/ads', function () {
+//     $advertisement = Adverstisement::all();
+// });
 
 
 Route::group(['prefix' => 'internon'], function(){
-    Route::post('register','Controllers\User_Controller@store');
     Route::post('auth','Auth\AuthController@authenticate');
     
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('auth','Auth\AuthController@getAuthenticatedUser');
         
         // user
-        Route::get('register/{id}','Controllers\User_Controller@show');
-        Route::put('register/{id}', 'Controllers\User_Controller@update');
-        Route::delete('register/{id}','Controllers\User_Controller@destroy');
+        Route::resource('user', 'Controllers\User_Controller');
 
-
-        Route::resource('ads', 'Controllers\Ads_Controller');
+        //transaction
+        Route::resource('ads', 'Controllers\Advertisement_Controller');
         Route::resource('application','Controllers\Application_Controller');
 
+
+        //single route
+        Route::get('company_ads/{id}','Controllers\Advertisement_Controller@Company_Ads');
+        Route::get('company_show_applicants/{id}','Controllers\Application_Controller@show_applicants');
+        Route::get('student_show_applications/{id}','Controllers\Application_Controller@student_show_application');
+        
     });
 });

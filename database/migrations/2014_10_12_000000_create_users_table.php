@@ -49,10 +49,10 @@ class CreateUsersTable extends Migration
 			$table->increments('ads_id');
 			$table->string('company_id',255);
             $table->string('ads_title',255);
-			$table->string('ads_description',255);
-			$table->string('ads_tags',255);
-			$table->string('ads_qualification',255);
 			$table->string('ads_requirement',255);
+			$table->string('ads_tags',255);
+			$table->string('ads_responsibility',255);            
+			$table->string('ads_contact',255);
 			$table->string('ads_banner_photo',255)->nullable();
 			$table->string('ads_visibility',255)->nullable();
 			$table->timestamps();
@@ -62,11 +62,10 @@ class CreateUsersTable extends Migration
 
          Schema::create('tbl_application', function (Blueprint $table) {
 			$table->increments('application_id');
-			$table->string('student_id',255)->unique();
+			$table->string('student_id',255);
 			$table->string('ads_id',255);
 			$table->string('company_id',255);
             $table->timestamps();
-			
 		});
 
         

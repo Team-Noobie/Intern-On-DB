@@ -9,6 +9,9 @@ use Carbon\Carbon;
 
 use App\User;
 use App\Models\User_Student;
+use App\Models\User_Company;
+use App\Models\User_Coordinator;
+
 
 class User_Controller extends Controller
 {
@@ -55,8 +58,6 @@ class User_Controller extends Controller
             $student->user_ID = $user->id;
             $student->save();
         }
-
-
         return response()->json($user);
     }
 
@@ -72,23 +73,12 @@ class User_Controller extends Controller
         $user = User::find($id);
         
         if($user->type == "student"){
-            $student = DB::table('tbl_user')
-                ->join('tbl_user_student','tbl_user.id','=','tbl_user_student.user_ID')
-                ->select('tbl_user_student.student_name','tbl_user.email')
-                ->where('tbl_user.id',$id)
-                ->get();
-                return response()->json($student);
+            return response()->json($user->student);
         }
         
         if($user->type == "company"){
-            $company = DB::table('tbl_user')
-                ->join('tbl_user_company','tbl_user.id','=','tbl_user_company.user_ID')
-                ->select('tbl_user_company.company_name','tbl_user.email')
-                ->where('tbl_user.id',$id)
-                ->get();
-                return response()->json($company);
+            return response()->json($user->company);
         }
-
         
     }
 
