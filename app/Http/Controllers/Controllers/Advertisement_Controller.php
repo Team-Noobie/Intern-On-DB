@@ -44,7 +44,7 @@ class Advertisement_Controller extends Controller
      */
     public function store(Request $request)
     {
-            $ad = new Adverstisement;
+            $ad = new Advertisement;
             $ad->company_id = $request->id;
             $ad->ads_title = $request->ad_title;
             $ad->ads_requirement = implode(",",$request->ad_requirements);
@@ -65,8 +65,10 @@ class Advertisement_Controller extends Controller
     public function show($id)
     {
         $ad = Advertisement::find($id);
-        $ad->Company;
+        // $ad->Company;
         $ad->ads_requirement = explode(',',$ad->ads_requirement);
+        $ad->ads_responsibility = explode(',',$ad->ads_responsibility);
+        $ad->ads_contact = explode(',',$ad->ads_contact);
         return response()->json($ad);
     }
 
@@ -110,5 +112,23 @@ class Advertisement_Controller extends Controller
             $advertisement->count = $advertisement->Application->count();
         }
         return response()->json($company[0]->Advertisements);
+    }
+    public function Student_Ads(Request $request){
+        $advertisement = DB::table('tbl_advertisement')
+            ->join('tbl_application', 'tbl_advertisement.ID', '=', 'tbl_application.ads_id')
+            ->join('tbl_user_student', 'tbl_user_student.user_ID', '=', 'tbl_application.student_id')
+            ->select('*')
+            ->where('tbl_application.student_id',$request->student_id)
+            ->where('tbl_application.ads_id',$request->ad_id)
+            ->get();
+
+        if($advertisement->count() == 1){
+            $advertisement->hasApplied= true;
+        }
+        if($advertisement->count() == 0){
+            $advertisement->hasApplied =  false;
+        }
+
+        return response()->json($advertisement->hasApplied);
     }
 }

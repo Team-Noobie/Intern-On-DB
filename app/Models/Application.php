@@ -21,5 +21,4 @@ class Application extends Model
     public function student(){
          return $this->hasOne('App\Models\User_Student','User_ID','student_id');
     }
-
 }

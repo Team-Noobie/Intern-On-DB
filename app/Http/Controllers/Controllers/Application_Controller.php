@@ -42,13 +42,11 @@ class Application_Controller extends Controller
     {
         //
             $app = new Application;
-            $ad = Advertisement::find($request->ad_id);
-            
-            $app->ads_id=$request->ad_id;
-            $app->company_id=$ad->company_id;
-            $app->student_id=$request->student_id;
+            $app->ads_id= $request->ad_id;
+            $app->company_id= $request->company_id;
+            $app->student_id= $request->student_id;
             $app->save();
-                return response()->json($app);
+            return response()->json($request);
     }
 
     /**

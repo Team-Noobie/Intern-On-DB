@@ -32,7 +32,12 @@ class User extends Authenticatable
     public function student(){
         return $this->hasOne('App\Models\User_Student','user_ID','id');
     }
+
     public function company(){
         return $this->hasOne('App\Models\User_Company','user_ID','id');
+    }
+
+    public function coordinator(){
+        return $this->hasOne('App\Models\User_Coordinator','user_ID','id');
     }
 }

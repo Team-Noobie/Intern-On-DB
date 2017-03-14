@@ -2,8 +2,6 @@
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Models\Adverstisement;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,6 +36,7 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('company_ads/{id}','Controllers\Advertisement_Controller@Company_Ads');
         Route::get('company_show_applicants/{id}','Controllers\Application_Controller@show_applicants');
         Route::get('student_show_applications/{id}','Controllers\Application_Controller@student_show_application');
+        Route::post('checkApplication','Controllers\Advertisement_Controller@Student_Ads');
         
     });
 });

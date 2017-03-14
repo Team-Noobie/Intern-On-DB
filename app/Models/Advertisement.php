@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 class Advertisement extends Model
 {
     //
@@ -17,4 +16,8 @@ class Advertisement extends Model
     public function Application(){
         return $this->hasMany('App\Models\Application','ads_id','ID');
     }
+
+    // public function checkApplication($id){
+    //     $query = Application::where('student_id',$id)->get();
+    // }
 }

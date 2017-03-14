@@ -79,6 +79,10 @@ class User_Controller extends Controller
         if($user->type == "company"){
             return response()->json($user->company);
         }
+
+         if($user->type == "coordinator"){
+            return response()->json($user->coordinator);
+        }
         
     }
 
