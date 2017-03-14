@@ -113,6 +113,7 @@ class Advertisement_Controller extends Controller
         }
         return response()->json($company[0]->Advertisements);
     }
+    
     public function Student_Ads(Request $request){
         $advertisement = DB::table('tbl_advertisement')
             ->join('tbl_application', 'tbl_advertisement.ID', '=', 'tbl_application.ads_id')

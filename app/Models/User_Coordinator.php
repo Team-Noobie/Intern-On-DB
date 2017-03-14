@@ -9,4 +9,6 @@ class User_Coordinator extends Model
 {
     //
         protected $table = 'tbl_user_coordinator';
+        protected $hidden = ['ID'];
+
 }
