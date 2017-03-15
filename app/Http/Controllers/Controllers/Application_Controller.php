@@ -56,21 +56,12 @@ class Application_Controller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {       
 
-        // $query = DB::table('tbl_application')
-        //         ->join('tbl_user_student','tbl_application.student_id','=','tbl_user_student.user_ID')
-        //         ->select('*')
-        //         ->where('tbl_application.ads_id',$id)
-        //         ->get();
-
-        // $applications = new \stdClass();
-        //         foreach($query as $ap => $value){
-        //             $applications->$ap = $value;
-        //         }
-
-        // $application = Application::where('ads_id',$id)->get();
-        // return response()->json($id);
+            $application = Application::find($id);
+            $application->student;
+            $application->advertisement;
+            return response()->json($application);
     }
 
     /**
@@ -108,14 +99,12 @@ class Application_Controller extends Controller
     }
     public function show_applicants($id)
     {
-
         $applications = Advertisement::find($id)->Application;
         foreach ($applications as $application) {
             # code...
             $application->student;
         }
         return response()->json($applications); 
-
     }
 
     public function student_show_application($id)
