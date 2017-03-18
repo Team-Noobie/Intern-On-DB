@@ -18,7 +18,14 @@ class Application extends Model
     public function company(){
         return $this->hasOne('App\Models\User_Company','user_ID','company_id');
     }
+
     public function student(){
-         return $this->hasOne('App\Models\User_Student','User_ID','student_id');
+         return $this->hasOne('App\Models\User_Student','user_ID','student_id');
     }
+
+    public function logs(){
+         return $this->hasMany('App\Models\Application_Log','application_id','ID');
+    }
+    
+
 }

@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Models\User_Student;
 use App\Models\User_Company;
+use App\Models\User_Coordinator;
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,27 +17,36 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user1 = new User();
-        $user1->email = 'alex@gmail.com';
+        $user1->username = 'rian';
         $user1->password = bcrypt('123');
         $user1->type = 'student';
         $user1->save();
 
         $user2 = new User();
-        $user2->email = 'company@gmail.com';
+        $user2->username = 'company1';
         $user2->password = bcrypt('123');
         $user2->type = 'company';
         $user2->save();
 
+        $user3 = new User();
+        $user3->username = 'coordinator2';
+        $user3->password = bcrypt('123');
+        $user3->type = 'coordinator';
+        $user3->save();
+
         $student = new User_Student();
         $student->user_ID = $user1->id;
-        $student->student_name = 'Sequena, Alexander R.';
+        $student->student_name = 'Viloria, Rian Kristoffer M.';
         $student->save();
 
         $company = new User_Company();
         $company->user_ID = $user2->id;
-        $company->company_name = 'Team Noobie';
+        $company->company_name = 'afrotecH Industry';
         $company->save();
-        
 
+        $coordinator = new User_Coordinator();
+        $coordinator->user_ID = $user3->id;
+        $coordinator->coordinator_name = 'Mars Canita';
+        $coordinator->save();
     }
 }

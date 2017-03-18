@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Controllers\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+
+use App\Models\Advertisement;
+use App\Models\Application;
+use App\Models\Application_Log;
+use App\Models\User_Company;
+use App\User;
+
+class Company_Controller extends Controller
+{
+    //
+    public function company_profile($id){
+        $user = User::find($id);
+        return response()->json($user->company);
+    }
+    
+     public function company_advertisement_list($id){
+        $ads = Advertisement::where('company_id',$id)->get();
+        return response()->json($ads);
+    }
+
+    public function create_advertisement(Request $request){
+            $ad = new Advertisement;
+            $ad->company_id = $request->id;
+            $ad->ads_title = $request->ad_title;
+            $ad->ads_requirement = implode(",",$request->ad_requirements);
+            $ad->ads_tags = $request->ad_tags;
+            $ad->ads_responsibility = implode(",",$request->ad_responsibilities);
+            $ad->ads_contact = implode(",",$request->ad_contacts);
+            $ad->ads_visibility = "Not-Visible";
+            $ad->save();
+            return response()->json($request);
+    }
+
+    public function view_advertisement($id){
+        $advertisement = Advertisement::find($id);
+        $advertisement->ads_requirement = explode(',',$advertisement->ads_requirement);
+        $advertisement->ads_responsibility = explode(',',$advertisement->ads_responsibility);
+        $advertisement->ads_contact = explode(',',$advertisement->ads_contact);
+        return response()->json($advertisement);    
+    }
+
+    public function advertisement_application_list($id){
+        $ads = Advertisement::where('company_id',$id)->get();
+        foreach ($ads as $ad) {
+            $ad->count = $ad->Application->count();
+        }
+        return response()->json($ads);
+    }
+
+    public function advertisement_applicant_list($id){
+        $ads = Advertisement::find($id);
+        $applications = $ads->Application;
+
+        foreach ($applications as $application) {
+            $application->student;
+        }
+        return response()->json($applications); 
+    }
+
+    public function view_application($id){
+        $application = Application::find($id);
+        $application->student;
+        $application->advertisement;
+
+        return response()->json($application);         
+    }
+}

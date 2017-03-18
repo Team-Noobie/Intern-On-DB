@@ -14,4 +14,8 @@ class User_Student extends Model
     public function Application(){
         return $this->hasMany('App\Models\Application','student_id','user_ID');
     }
+
+    public function User(){
+        return $this->belongsTo('App\User','user_ID','id');
+    }
 }
