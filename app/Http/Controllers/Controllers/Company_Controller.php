@@ -30,7 +30,6 @@ class Company_Controller extends Controller
             $ad->company_id = $request->id;
             $ad->ads_title = $request->ad_title;
             $ad->ads_requirement = $request->ad_requirements;
-            // $ad->ads_tags = $request->ad_tags;
             $ad->ads_responsibility = $request->ad_responsibilities;
             $ad->ads_contact = $request->ad_contacts;
             $ad->ads_visibility = "Not-Visible";
@@ -40,9 +39,9 @@ class Company_Controller extends Controller
 
     public function view_advertisement($id){
         $advertisement = Advertisement::find($id);
-        $advertisement->ads_requirement = explode(',',$advertisement->ads_requirement);
-        $advertisement->ads_responsibility = explode(',',$advertisement->ads_responsibility);
-        $advertisement->ads_contact = explode(',',$advertisement->ads_contact);
+        $advertisement->ads_requirement = $advertisement->ads_requirement;
+        $advertisement->ads_responsibility = $advertisement->ads_responsibility;
+        $advertisement->ads_contact = $advertisement->ads_contact;
         return response()->json($advertisement);    
     }
 

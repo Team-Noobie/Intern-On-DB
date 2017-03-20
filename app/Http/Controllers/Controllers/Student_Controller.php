@@ -78,12 +78,22 @@ class Student_Controller extends Controller
     public function upload_resume(Request $request){
         
         $student = User_Student::find($request->id);
-        $student->resume = $request->file('file')->getClientOriginalName();
-        $student->update();
+        if($student->resume == ""){
+            Storage::put('resume/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
+                file_get_contents($request->file('file')->getRealPath())
+            );
+            $student->resume = $request->file('file')->getClientOriginalName();
+            $student->update();
+        }else{
+            Storage::delete('resume/'.$request->id.'/'.$student->resume);
 
-        Storage::put('resume/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
-            file_get_contents($request->file('file')->getRealPath())
-        );
+            Storage::put('resume/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
+                file_get_contents($request->file('file')->getRealPath())
+            );
+            $student->resume = $request->file('file')->getClientOriginalName();
+            $student->update();
+        }
+        
 
         return response()->json($student);        
     }
