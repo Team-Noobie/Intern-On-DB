@@ -26,7 +26,18 @@ class CreateUsersTable extends Migration
         Schema::create('tbl_user_company', function (Blueprint $table) {
             $table->increments('ID');
             $table->Integer('user_ID')->unique();
-            $table->string('company_name',50);
+            $table->string('company_name',50)->nullable();
+            $table->string('company_overview',1000)->nullable();
+            $table->string('company_contact_no',50)->nullable();
+            $table->string('company_address',100)->nullable();
+            $table->string('company_email',50)->nullable();
+            $table->string('company_website',50)->nullable();
+            $table->string('company_spoken_lang',50)->nullable();
+            $table->string('company_industry',50)->nullable();
+            $table->string('company_job_salary',50)->nullable();
+            $table->string('company_benefits',50)->nullable();
+            $table->string('company_why_join_us',1000)->nullable();
+            $table->string('company_logo',250)->nullable();
             $table->timestamps();
         });
 
@@ -60,12 +71,11 @@ class CreateUsersTable extends Migration
 			$table->increments('ID');
 			$table->Integer('company_id');
             $table->string('ads_title',50);
-			$table->string('ads_requirement',1000);
+			$table->string('ads_job_description',1000);
 			// $table->string('ads_tags',255);
-			$table->string('ads_responsibility',1000);
-			$table->string('ads_contact',255);      
-			$table->string('ads_banner_photo',255)->nullable();
-			$table->string('ads_visibility',255)->nullable();
+			$table->string('ads_contact',20);      
+			$table->string('ads_work_location',200)->nullable();
+			$table->string('ads_visibility',10)->nullable();
 			$table->timestamps();
 		});
 
@@ -89,6 +99,8 @@ class CreateUsersTable extends Migration
             $table->date('interview_date');
             $table->timestamps();
 		});
+
+        
 
 
        
