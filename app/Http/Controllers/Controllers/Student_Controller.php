@@ -53,7 +53,6 @@ class Student_Controller extends Controller
         if($advertisement->count() == 0){
             $advertisement->hasApplied =  false;
         }
-
         return response()->json($advertisement->hasApplied);       
     }
 
@@ -78,13 +77,15 @@ class Student_Controller extends Controller
 
     public function upload_resume(Request $request){
         
-        // $student = User_Student::find($request->id);
-        // $student->resume = $request->file('file')->getClientOriginalName();
-        // $student->update();
+        $student = User_Student::find($request->id);
+        $student->resume = $request->file('file')->getClientOriginalName();
+        $student->update();
 
-        // Storage::put('resume/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
-        //     file_get_contents($request->file('file')->getRealPath())
-        // );
+        Storage::put('resume/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
+            file_get_contents($request->file('file')->getRealPath())
+        );
+
+        return response()->json($student);        
     }
     
 }

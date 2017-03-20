@@ -9,7 +9,7 @@ class User_Student extends Model
     //
     protected $table = 'tbl_user_student';
     protected $hidden = ['ID'];
-    // protected $primaryKey = 'user_ID';
+    protected $primaryKey = 'user_ID';
 
     public function Application(){
         return $this->hasMany('App\Models\Application','student_id','user_ID');

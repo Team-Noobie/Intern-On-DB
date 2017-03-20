@@ -41,6 +41,7 @@ class CreateUsersTable extends Migration
             $table->increments('ID');
             $table->Integer('user_ID')->unique();
             $table->string('student_name');
+            $table->string('resume');
             $table->timestamps();
         });
 

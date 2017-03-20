@@ -54,13 +54,13 @@ class Company_Controller extends Controller
         return response()->json($ads);
     }
 
-    public function advertisement_applicant_list($id){
-        $ads = Advertisement::find($id);
-        $applications = $ads->Application;
+    public function advertisement_applicant_list(Request $request,$id){
 
+        $applications = Application::where('ads_ID',$id)->where('status',$request->type)->get();       
         foreach ($applications as $application) {
             $application->student;
         }
+
         return response()->json($applications); 
     }
 
@@ -68,7 +68,10 @@ class Company_Controller extends Controller
         $application = Application::find($id);
         $application->student;
         $application->advertisement;
-
+        if($application->status == "New"){
+            $application->status = "Pending";
+            $application->update();
+        }
         return response()->json($application);         
     }
 }
