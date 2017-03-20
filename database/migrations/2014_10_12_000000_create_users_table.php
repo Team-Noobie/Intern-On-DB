@@ -40,18 +40,17 @@ class CreateUsersTable extends Migration
         Schema::create('tbl_user_student', function (Blueprint $table) {
             $table->increments('ID');
             $table->Integer('user_ID')->unique();
-            $table->string('student_firstname',50);
-            $table->string('student_lastname',50);
-            $table->string('student_email',50);
-            $table->string('student_birthday',50);
-            $table->string('student_address',50);
-            $table->string('student_email',50);
-            $table->string('student_contact_no',50);
-            $table->string('student_course',50);
-            $table->string('student_department',50);
-            $table->string('student_institute',50);
-            $table->string('student_school',50);  
-            $table->string('resume',50);
+            $table->string('student_firstname',50)->nullable();
+            $table->string('student_lastname',50)->nullable();
+            $table->string('student_email',50)->nullable();
+            $table->date('student_birthday')->nullable();
+            $table->string('student_address',50)->nullable();
+            $table->string('student_contact_no',50)->nullable();
+            $table->string('student_course',50)->nullable();
+            $table->string('student_department',50)->nullable();
+            $table->string('student_institute',50)->nullable();
+            $table->string('student_school',50)->nullable();  
+            $table->string('resume',50)->nullable()->nullable();
             $table->timestamps();
         });
 
