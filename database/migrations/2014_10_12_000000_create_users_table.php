@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
         Schema::create('tbl_user', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique();
-            $table->string('password');
-            $table->string('type');
+            $table->string('password',30);
+            $table->string('type',10);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -26,33 +26,43 @@ class CreateUsersTable extends Migration
         Schema::create('tbl_user_company', function (Blueprint $table) {
             $table->increments('ID');
             $table->Integer('user_ID')->unique();
-            $table->string('company_name');
+            $table->string('company_name',50);
             $table->timestamps();
         });
 
         Schema::create('tbl_user_coordinator', function (Blueprint $table) {
             $table->increments('ID');
             $table->Integer('user_ID')->unique();
-            $table->string('coordinator_name');
+            $table->string('coordinator_name',30);
             $table->timestamps();
         });
 
         Schema::create('tbl_user_student', function (Blueprint $table) {
             $table->increments('ID');
             $table->Integer('user_ID')->unique();
-            $table->string('student_name');
-            $table->string('resume');
+            $table->string('student_firstname',50);
+            $table->string('student_lastname',50);
+            $table->string('student_email',50);
+            $table->string('student_birthday',50);
+            $table->string('student_address',50);
+            $table->string('student_email',50);
+            $table->string('student_contact_no',50);
+            $table->string('student_course',50);
+            $table->string('student_department',50);
+            $table->string('student_institute',50);
+            $table->string('student_school',50);  
+            $table->string('resume',50);
             $table->timestamps();
         });
 
 
         Schema::create('tbl_advertisement', function (Blueprint $table) {
 			$table->increments('ID');
-			$table->string('company_id',255);
-            $table->string('ads_title',255);
-			$table->string('ads_requirement',255);
-			$table->string('ads_tags',255);
-			$table->string('ads_responsibility',255);
+			$table->Integer('company_id',5);
+            $table->string('ads_title',50);
+			$table->string('ads_requirement',1000);
+			// $table->string('ads_tags',255);
+			$table->string('ads_responsibility',1000);
 			$table->string('ads_contact',255);      
 			$table->string('ads_banner_photo',255)->nullable();
 			$table->string('ads_visibility',255)->nullable();
@@ -75,10 +85,15 @@ class CreateUsersTable extends Migration
 			$table->increments('ID');
 			$table->Integer('application_ID');           
             $table->string('remarks',1000)->nullable();
-            $table->string('status',20); 
+            $table->string('status',50); 
             $table->date('interview_date');
             $table->timestamps();
 		});
+
+
+       
+
+
     }
     /**
      * Reverse the migrations.
@@ -95,4 +110,8 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('tbl_application');
         Schema::dropIfExists('tbl_application_log');
     }
+
+
+
+
 }
