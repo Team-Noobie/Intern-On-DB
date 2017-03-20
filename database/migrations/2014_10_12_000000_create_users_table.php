@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
         Schema::create('tbl_user', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique();
-            $table->string('password',30);
-            $table->string('type',10);
+            $table->string('password');
+            $table->string('type');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -57,7 +57,7 @@ class CreateUsersTable extends Migration
 
         Schema::create('tbl_advertisement', function (Blueprint $table) {
 			$table->increments('ID');
-			$table->Integer('company_id',5);
+			$table->Integer('company_id');
             $table->string('ads_title',50);
 			$table->string('ads_requirement',1000);
 			// $table->string('ads_tags',255);
