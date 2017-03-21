@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Storage;
+
 
 
 use App\Models\Advertisement;
@@ -30,23 +33,16 @@ class Company_Controller extends Controller
             $ad->company_id = $request->id;
             $ad->ads_title = $request->ad_title;
             // $ad->ads_requirement = $request->ad_requirements;
-            $ad->ads_requirement = 'trial';
-            
-            // $ad->ads_responsibility = $request->ad_responsibilities;
-            $ad->ads_responsibility = 'trial';
-            
-            
+            $ad->ads_job_description = $request->ad_description;
+            $ad->ads_work_location = 'location';
             $ad->ads_contact = $request->ad_contacts;
-            $ad->ads_visibility = "Not-Visible";
+            $ad->ads_visibility = "Hide";
             $ad->save();
             return response()->json($request);
     }
 
     public function view_advertisement($id){
         $advertisement = Advertisement::find($id);
-        $advertisement->ads_requirement = $advertisement->ads_requirement;
-        $advertisement->ads_responsibility = $advertisement->ads_responsibility;
-        $advertisement->ads_contact = $advertisement->ads_contact;
         return response()->json($advertisement);    
     }
 
@@ -93,5 +89,21 @@ class Company_Controller extends Controller
         $app_log->reason = $request->reason;        
         $app_log->save();
         return response()->json($app_log);
+    }
+
+    public function get_schedules($id){
+
+        $schedules = DB::table('tbl_application')
+            ->join('tbl_application_log', 'tbl_application.id', '=', 'tbl_application_log.application_ID')
+            ->join('tbl_user_student', 'tbl_user_student.user_ID', '=', 'tbl_application.student_id')
+            ->join('tbl_advertisement', 'tbl_advertisement.id', '=', 'tbl_application.ads_id')            
+            ->select('*')
+            ->where('tbl_application.company_id',$id)
+            ->where('tbl_application_log.status','Set')
+            ->get();
+
+        return response()->json($schedules);
+
+        
     }
 }
