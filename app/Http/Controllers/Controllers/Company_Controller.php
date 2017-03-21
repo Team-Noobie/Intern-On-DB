@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Storage;
 
-
-
 use App\Models\Advertisement;
 use App\Models\Application;
 use App\Models\Application_Log;
