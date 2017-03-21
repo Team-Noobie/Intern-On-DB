@@ -45,19 +45,6 @@ class Application_Log_Controller extends Controller
         return response()->json($application);
     }
 
-    public function set_interview(Request $request,$id){
-        $application = Application::find($id);
-        $application->status = "On-Process";
-        $application->update();
-
-        $app_log = new Application_Log; 
-        $app_log->application_ID = $id;
-        $app_log->status = "Set";
-        $app_log->interview_date = $request->interview_date;
-        $app_log->save();
-        return response()->json($application->logs);
-    }
-
     public function interview_result(Request $request,$id){
         $app_log = Application_Log::find($id);
         $app_log->remarks = $request->remarks;

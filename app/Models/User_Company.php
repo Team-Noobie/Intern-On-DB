@@ -9,7 +9,7 @@ class User_Company extends Model
 {
     //
     protected $table = 'tbl_user_company';
-    protected $hidden = ['ID'];
+    protected $hidden = ['id'];
     protected $primaryKey = 'user_ID';
 
     public function Advertisements(){

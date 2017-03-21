@@ -8,10 +8,10 @@ class Application_Log extends Model
 {
     //
     protected $table = 'tbl_application_log';
-    protected $primaryKey = 'ID';
+    protected $primaryKey = 'id';
 
     public function application(){
-         return $this->hasOne('App\Models\Application','ID','application_id');
+         return $this->hasOne('App\Models\Application','id','application_id');
     }
 
     public function check_set(){
