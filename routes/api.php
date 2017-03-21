@@ -55,7 +55,7 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('get_schedules/{id}','Controllers\Company_Controller@get_schedules');    
         Route::get('hire_applicant/{id}','Controllers\Company_Controller@hire_applicant');
         Route::get('intern_list/{id}','Controllers\Company_Controller@intern_list');
-        
+        Route::get('interview_result/{id}','Controllers\Company_Controller@interview_result');
            
     });
 });

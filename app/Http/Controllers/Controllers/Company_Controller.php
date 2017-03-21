@@ -137,4 +137,12 @@ class Company_Controller extends Controller
         }
         return response()->json($company->Interns);
     }
+
+    public function interview_result(Request $request,$id){
+        $app_log = Application_Log::find($id);
+        $app_log->remarks = $request->remarks;
+        $app_log->update();
+        return response()->json($app_log);
+        
+    }
 }
