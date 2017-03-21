@@ -44,7 +44,14 @@ class CreateUsersTable extends Migration
         Schema::create('tbl_user_coordinator', function (Blueprint $table) {
             $table->increments('id');
             $table->Integer('user_ID')->unique();
-            $table->string('coordinator_name',30);
+            $table->string('coordinator_firstname',30);
+            $table->string('coordinator_lastname',30);
+            $table->string('coordinator_department',50)->nullable();
+            $table->string('coordinator_institute',50)->nullable();
+            $table->string('coordinator_school',50)->nullable();
+            $table->string('coordinator_contact_no',30)->nullable();
+            $table->string('coordinator_address',50)->nullable();
+            $table->string('coordinator_email',50)->nullable();
             $table->timestamps();
         });
 

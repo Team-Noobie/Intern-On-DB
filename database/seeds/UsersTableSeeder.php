@@ -67,7 +67,14 @@ class UsersTableSeeder extends Seeder
 
         $coordinator = new User_Coordinator();
         $coordinator->user_ID = $user3->id;
-        $coordinator->coordinator_name = 'Mars Canita';
+        $coordinator->coordinator_firstname = 'Mars';
+        $coordinator->coordinator_lastname = 'Canita';
+        $coordinator->coordinator_department = 'Math';
+        $coordinator->coordinator_institute = 'IAS';
+        $coordinator->coordinator_school = 'FEU';
+        $coordinator->coordinator_contact_no = '09268121145';
+        $coordinator->coordinator_address = 'sampaloc manila';
+        $coordinator->coordinator_email = 'mvpcanita@gmail.com';
         $coordinator->save();
     }
 }
