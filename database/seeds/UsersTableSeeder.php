@@ -52,6 +52,17 @@ class UsersTableSeeder extends Seeder
         $company = new User_Company();
         $company->user_ID = $user2->id;
         $company->company_name = 'afrotecH Industry';
+        $company->company_overview = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati nemo amet quo adipisci, tempora dolore suscipit earum provident aperiam voluptatum. Placeat tempore nam velit, nostrum sint architecto, iure nesciunt et.';
+        $company->company_contact_no = '1234 567 890';
+        $company->company_address = '#123 abcd efgh jkl';
+        $company->company_email = 'sharina@afrotech.com';
+        $company->company_website = 'www.AI.com';
+        $company->company_spoken_lang = 'English';
+        $company->company_industry = 'IT,Engineering';
+        $company->company_benefits = 'friends with,ex with';
+        $company->company_job_salary = 'tatlo dos';
+        $company->company_why_join_us = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda eius dolor delectus accusantium. Sunt cumque, deserunt inventore consequuntur. Alias, corrupti quis debitis velit magni voluptatum commodi provident? Sapiente, cupiditate, placeat?';
+        $company->company_logo = '#image';
         $company->save();
 
         $coordinator = new User_Coordinator();
