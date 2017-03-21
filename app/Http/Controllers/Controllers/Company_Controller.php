@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Storage;
+
 
 
 use App\Models\Advertisement;
@@ -93,5 +96,21 @@ class Company_Controller extends Controller
         $app_log->reason = $request->reason;        
         $app_log->save();
         return response()->json($app_log);
+    }
+
+    public function get_schedules($id){
+
+        $schedules = DB::table('tbl_application')
+            ->join('tbl_application_log', 'tbl_application.id', '=', 'tbl_application_log.application_ID')
+            ->join('tbl_user_student', 'tbl_user_student.user_ID', '=', 'tbl_application.student_id')
+            ->join('tbl_advertisement', 'tbl_advertisement.id', '=', 'tbl_application.ads_id')            
+            ->select('*')
+            ->where('tbl_application.company_id',$id)
+            ->where('tbl_application_log.status','Set')
+            ->get();
+
+        return response()->json($schedules);
+
+        
     }
 }

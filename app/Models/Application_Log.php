@@ -11,10 +11,9 @@ class Application_Log extends Model
     protected $primaryKey = 'id';
 
     public function application(){
-         return $this->hasOne('App\Models\Application','id','application_id');
+        //  return $this->belongsTo('App\Models\Application','id','application_id');
+        return $this->belongsTo('App\Models\Application','application_ID','id');
+
     }
 
-    public function check_set(){
-         return $this->where('Status','Set');        
-    }
 }
