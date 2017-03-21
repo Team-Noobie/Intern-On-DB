@@ -13,6 +13,7 @@ use App\Models\Advertisement;
 use App\Models\Application;
 use App\Models\Application_Log;
 use App\Models\User_Company;
+use App\Models\Company_interns;
 use App\User;
 
 class Company_Controller extends Controller
@@ -92,7 +93,6 @@ class Company_Controller extends Controller
     }
 
     public function get_schedules($id){
-
         $schedules = DB::table('tbl_application')
             ->join('tbl_application_log', 'tbl_application.id', '=', 'tbl_application_log.application_ID')
             ->join('tbl_user_student', 'tbl_user_student.user_ID', '=', 'tbl_application.student_id')
@@ -101,9 +101,40 @@ class Company_Controller extends Controller
             ->where('tbl_application.company_id',$id)
             ->where('tbl_application_log.status','Set')
             ->get();
-
         return response()->json($schedules);
+    }
 
-        
+    public function hire_applicant($id){
+        $application = Application::find($id);
+        $application->student;
+        $application->advertisement;
+        $application->status = "For Hiring";
+        $application->update();     
+
+        $intern = new Company_interns;
+        $intern->student_id = $application->student_id;
+        $intern->company_id = $application->company_id;
+        $intern->save();     
+
+        $intern->company;
+        $intern->student;
+        return response()->json($intern);
+    }
+    public function reject_application(Request $request,$id){
+        $application = Application::find($id);
+        $application->student;
+        $application->advertisement;
+        $application->status = "Failed";
+        $application->update();
+
+        return response()->json($application);
+    }
+
+    public function intern_list($id){
+        $company = User_Company::find($id);
+        foreach ($company->Interns as $intern) {
+            $intern->student;
+        }
+        return response()->json($company->Interns);
     }
 }
