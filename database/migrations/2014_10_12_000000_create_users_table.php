@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('tbl_user_company', function (Blueprint $table) {
-            $table->increments('ID');
+            $table->increments('id');
             $table->Integer('user_ID')->unique();
             $table->string('company_name',50)->nullable();
             $table->string('company_overview',1000)->nullable();
@@ -42,14 +42,14 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('tbl_user_coordinator', function (Blueprint $table) {
-            $table->increments('ID');
+            $table->increments('id');
             $table->Integer('user_ID')->unique();
             $table->string('coordinator_name',30);
             $table->timestamps();
         });
 
         Schema::create('tbl_user_student', function (Blueprint $table) {
-            $table->increments('ID');
+            $table->increments('id');
             $table->Integer('user_ID')->unique();
             $table->string('student_firstname',50)->nullable();
             $table->string('student_lastname',50)->nullable();
@@ -68,7 +68,7 @@ class CreateUsersTable extends Migration
 
 
         Schema::create('tbl_advertisement', function (Blueprint $table) {
-			$table->increments('ID');
+			$table->increments('id');
 			$table->Integer('company_id');
             $table->string('ads_title',50);
 			$table->string('ads_job_description',1000);
@@ -82,7 +82,7 @@ class CreateUsersTable extends Migration
         
 
          Schema::create('tbl_application', function (Blueprint $table) {
-			$table->increments('ID');
+			$table->increments('id');
 			$table->Integer('student_id');
 			$table->Integer('ads_id');
 			$table->Integer('company_id');
@@ -92,11 +92,13 @@ class CreateUsersTable extends Migration
 
 
         Schema::create('tbl_application_log', function (Blueprint $table) {
-			$table->increments('ID');
+			$table->increments('id');
 			$table->Integer('application_ID');           
             $table->string('remarks',1000)->nullable();
             $table->string('status',50); 
+            $table->string('reason',50);
             $table->date('interview_date');
+            $table->time('interview_time');            
             $table->timestamps();
 		});
 

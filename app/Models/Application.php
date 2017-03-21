@@ -8,11 +8,11 @@ class Application extends Model
 {
     //
     protected $table = 'tbl_application';
-    protected $primaryKey = 'ID';
+    protected $primaryKey = 'id';
 
 
     public function advertisement(){
-        return $this->belongsTo('App\Models\Advertisement','ads_id','ID');
+        return $this->belongsTo('App\Models\Advertisement','ads_id','id');
     }
 
     public function company(){
@@ -24,7 +24,7 @@ class Application extends Model
     }
 
     public function logs(){
-         return $this->hasMany('App\Models\Application_Log','application_id','ID');
+         return $this->hasMany('App\Models\Application_Log','application_id','id');
     }
     
 

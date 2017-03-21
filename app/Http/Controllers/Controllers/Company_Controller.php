@@ -72,10 +72,26 @@ class Company_Controller extends Controller
         $application = Application::find($id);
         $application->student;
         $application->advertisement;
+        $application->logs;
         if($application->status == "New"){
             $application->status = "Pending";
             $application->update();
         }
         return response()->json($application);         
+    }
+
+    public function set_interview(Request $request,$id){
+        $application = Application::find($id);
+        $application->status = "On-Process";
+        $application->update();
+
+        $app_log = new Application_Log; 
+        $app_log->application_ID = $id;
+        $app_log->status = "Set";
+        $app_log->interview_date = $request->interview_date;
+        $app_log->interview_time = $request->interview_time;
+        $app_log->reason = $request->reason;        
+        $app_log->save();
+        return response()->json($app_log);
     }
 }

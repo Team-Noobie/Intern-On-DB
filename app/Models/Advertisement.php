@@ -7,14 +7,14 @@ class Advertisement extends Model
 {
     //
     protected $table = 'tbl_advertisement';
-    protected $primaryKey = 'ID';
+    protected $primaryKey = 'id';
 
     public function Company(){
         return $this->belongsTo('App\Models\User_Company','company_id','user_ID');
     }
 
     public function Application(){
-        return $this->hasMany('App\Models\Application','ads_id','ID');
+        return $this->hasMany('App\Models\Application','ads_id','id');
     }
 
     // public function checkApplication($id){

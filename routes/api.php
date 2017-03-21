@@ -27,7 +27,7 @@ Route::group(['prefix' => 'internon'], function(){
         Route::post('view_application/{id}','Controllers\Application_Log_Controller@view_application');
         Route::post('hire_applicant/{id}','Controllers\Application_Log_Controller@hire_applicant');
         Route::post('reject_application/{id}','Controllers\Application_Log_Controller@reject_application');
-        Route::post('set_interview/{id}','Controllers\Application_Log_Controller@set_interview');    
+        // Route::post('set_interview/{id}','Controllers\Application_Log_Controller@set_interview');    
         Route::post('interview_result/{id}','Controllers\Application_Log_Controller@interview_result');    
         Route::get('check_set_interview/{id}','Controllers\Application_Log_Controller@check_set_interview'); 
         Route::get('application_view/{id}','Controllers\Application_Log_Controller@application');    
@@ -52,6 +52,8 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('advertisement_application_list/{id}','Controllers\Company_Controller@advertisement_application_list');
         Route::post('advertisement_applicant_list/{id}','Controllers\Company_Controller@advertisement_applicant_list');
         Route::get('view_application/{id}','Controllers\Company_Controller@view_application');
+        Route::post('set_interview/{id}','Controllers\Company_Controller@set_interview');    
+        
            
     });
 });
