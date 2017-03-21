@@ -29,8 +29,13 @@ class Company_Controller extends Controller
             $ad = new Advertisement;
             $ad->company_id = $request->id;
             $ad->ads_title = $request->ad_title;
-            $ad->ads_requirement = $request->ad_requirements;
-            $ad->ads_responsibility = $request->ad_responsibilities;
+            // $ad->ads_requirement = $request->ad_requirements;
+            $ad->ads_requirement = 'trial';
+            
+            // $ad->ads_responsibility = $request->ad_responsibilities;
+            $ad->ads_responsibility = 'trial';
+            
+            
             $ad->ads_contact = $request->ad_contacts;
             $ad->ads_visibility = "Not-Visible";
             $ad->save();

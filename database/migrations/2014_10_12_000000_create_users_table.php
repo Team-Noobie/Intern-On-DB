@@ -43,6 +43,7 @@ class CreateUsersTable extends Migration
             $table->string('student_firstname',50)->nullable();
             $table->string('student_lastname',50)->nullable();
             $table->string('student_email',50)->nullable();
+            $table->string('student_gender',50)->nullable();            
             $table->date('student_birthday')->nullable();
             $table->string('student_address',50)->nullable();
             $table->string('student_contact_no',50)->nullable();

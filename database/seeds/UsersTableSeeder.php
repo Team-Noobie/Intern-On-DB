@@ -39,13 +39,14 @@ class UsersTableSeeder extends Seeder
         $student->student_firstname = 'Rian Kristoffer';
         $student->student_lastname = 'Viloria';
         $student->student_email = 'rian@gmail.com';
-        $student->student_birthday = null;
+        $student->student_birthday = '1997-02-28';
         $student->student_address = 'Tomas Morato';
         $student->student_contact_no = '09753535424';
         $student->student_course = 'Course Outline';
         $student->student_department = 'Department of Justice';
         $student->student_institute = 'Institute of Hokage';
         $student->student_school = 'Far Eastern Far';
+        $student->student_gender = 'Male';
         $student->save();
 
         $company = new User_Company();
