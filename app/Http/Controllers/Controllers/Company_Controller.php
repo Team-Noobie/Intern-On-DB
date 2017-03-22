@@ -97,7 +97,9 @@ class Company_Controller extends Controller
             ->join('tbl_application_log', 'tbl_application.id', '=', 'tbl_application_log.application_ID')
             ->join('tbl_user_student', 'tbl_user_student.user_ID', '=', 'tbl_application.student_id')
             ->join('tbl_advertisement', 'tbl_advertisement.id', '=', 'tbl_application.ads_id')            
-            ->select('*')
+            ->select('tbl_application_log.id','tbl_user_student.student_firstname','tbl_user_student.student_lastname',
+            'tbl_application_log.reason','tbl_application_log.interview_date','tbl_application_log.interview_time'
+            ,'tbl_advertisement.ads_title')
             ->where('tbl_application.company_id',$id)
             ->where('tbl_application_log.status','Set')
             ->get();
@@ -120,7 +122,7 @@ class Company_Controller extends Controller
         $intern->student;
         return response()->json($intern);
     }
-    public function reject_application(Request $request,$id){
+    public function reject_application($id){
         $application = Application::find($id);
         $application->student;
         $application->advertisement;
@@ -141,6 +143,7 @@ class Company_Controller extends Controller
     public function interview_result(Request $request,$id){
         $app_log = Application_Log::find($id);
         $app_log->remarks = $request->remarks;
+        $app_log->status = "Done";
         $app_log->update();
         return response()->json($app_log);
         
