@@ -109,6 +109,12 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 		});
 
+         Schema::create('tbl_company_interns', function (Blueprint $table) {
+			$table->increments('id');
+			$table->Integer('company_id');
+            $table->Integer('student_id');
+            $table->timestamps();
+		});
         
 
 

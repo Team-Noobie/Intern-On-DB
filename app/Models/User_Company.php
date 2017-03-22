@@ -16,4 +16,8 @@ class User_Company extends Model
         return $this->hasMany('App\Models\Advertisement','company_id','user_ID');
     }
 
+    public function Interns(){
+        return $this->hasMany('App\Models\Company_interns','company_id','user_ID');
+    }
+
 }

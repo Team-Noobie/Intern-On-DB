@@ -31,9 +31,6 @@ class Student_Controller extends Controller
     public function view_advertisement($id){
         $advertisement = Advertisement::find($id);
         $advertisement->Company;
-        $advertisement->ads_requirement = explode(',',$advertisement->ads_requirement);
-        $advertisement->ads_responsibility = explode(',',$advertisement->ads_responsibility);
-        $advertisement->ads_contact = explode(',',$advertisement->ads_contact);
         return response()->json($advertisement);    
     }
 
