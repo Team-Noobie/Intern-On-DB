@@ -35,8 +35,8 @@ class Administrator_Module_Controller extends Controller
             return response()->json($request);
     }
 
-     public function company_accounts_list(	){
-        $company = User_Company	::all();
+     public function company_accounts_list(){
+        $company = User_Company::all();
         return response()->json($company);
     }
 

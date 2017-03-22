@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Section extends Model
+class Section_Students extends Model
 {
     //
-    protected $table = 'tbl_sections';
+    protected $table = 'tbl_section_students';
     protected $primaryKey = 'id';
 }
