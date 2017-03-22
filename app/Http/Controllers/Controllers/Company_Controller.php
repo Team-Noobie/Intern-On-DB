@@ -146,4 +146,6 @@ class Company_Controller extends Controller
         return response()->json($app_log);
         
     }
+
+    
 }

@@ -73,7 +73,26 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
+         Schema::create('tbl_user_hr', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('user_ID')->unique();  
+            $table->Integer('company_id');
+            $table->string('hr_firstname',50)->nullable();
+            $table->string('hr_lastname',50)->nullable();
+            $table->string('hr_email',50)->nullable();
+            $table->timestamps();
+        });  
 
+        Schema::create('tbl_user_sv', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('user_ID')->unique();
+            $table->Integer('company_id');            
+            $table->string('sv_firstname',50)->nullable();
+            $table->string('sv_lastname',50)->nullable();
+            $table->string('sv_email',50)->nullable();
+            $table->timestamps();
+        });    
+  
         Schema::create('tbl_advertisement', function (Blueprint $table) {
 			$table->increments('id');
 			$table->Integer('company_id');
@@ -116,6 +135,21 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 		});
         
+        Schema::create('tbl_sections', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('section_code',20);
+            $table->string('course_code',20);
+            $table->timestamps();
+        });
+        
+        Schema::create('tbl_section_students', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('section_id');
+            $table->Integer('student_id');
+            $table->Integer('coordinator_id');
+            $table->timestamps();
+        });
+
 
 
        

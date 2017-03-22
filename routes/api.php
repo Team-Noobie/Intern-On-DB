@@ -47,8 +47,14 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('company_advertisement_list/{id}','Controllers\Company_Controller@company_advertisement_list');
         Route::post('create_advertisement','Controllers\Company_Controller@create_advertisement');
         Route::get('company_view_advertisement/{id}','Controllers\Company_Controller@view_advertisement'); 
-        //Coordinator_Coordinator
+        //Coordinator_Controller 
         Route::get('coordinator_profile/{id}','Controllers\Coordinator_Controller@coordinator_profile');
+         Route::post('create_student_section','Controllers\Coordinator_Controller@create_student_section');
+
+        //Administrator_Controller
+        Route::get('administrator_module/{id}','Controllers\Administrator_Module_Controller@administrator_module');
+        Route::post('create_company_account','Controllers\Administrator_Module_Controller@create_company_account');
+        Route::get('company_accounts_list','Controllers\Administrator_Module_Controller@company_accounts_list');
 
             //edit post                       
         Route::get('advertisement_application_list/{id}','Controllers\Company_Controller@advertisement_application_list');
