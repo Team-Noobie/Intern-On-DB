@@ -20,10 +20,16 @@ class HR_Controller extends Controller
         $user = User::find($id);
         return response()->json($user->hr);
     }
+    
 
-    public function Interns(){
-        return $this->hasMany('App\Models\Company_interns','company_id','user_ID');
+     public function hr_application_list($id){
+        $applications = Application::where('company_id',$id)->get();
+        foreach ($applications as $application) {
+            $application->student;
+            $application->logs;
+            $application->advertisement;
+            
+        }
+        return response()->json($applications);
     }
-
-
 }

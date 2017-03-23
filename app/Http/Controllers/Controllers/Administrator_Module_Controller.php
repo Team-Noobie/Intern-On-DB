@@ -9,7 +9,10 @@ use Storage;
 
 use App\Models\User_Administrator;
 use App\Models\User_Company;
+use App\Models\User_Coordinator;
+
 use App\User;
+
 
 class Administrator_Module_Controller extends Controller
 {
@@ -26,6 +29,22 @@ class Administrator_Module_Controller extends Controller
             $company->user_ID = $user->id;
             $company->company_name = $request->company_name;
             $company->save();
+
+            return response()->json($request);
+    }
+
+     public function create_coordinator_account(Request $request){
+    		$user = new User;
+    		$user->username = $request->coordinator_username;
+    		$user->password = bcrypt("changeme");
+    		$user->type = "coordinator";
+    		$user->save();
+
+            $coordinator = new User_Coordinator;
+            $coordinator->user_ID = $user->id;
+            $coordinator->coordinator_firstname = $request->coordinator_firstname;
+            $coordinator->coordinator_lastname = $request->coordinator_lastname;
+            $coordinator->save();
 
             return response()->json($request);
     }

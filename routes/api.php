@@ -52,19 +52,23 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('section_list','Controllers\Coordinator_Controller@section_list');
 
         //Administrator_Controller
-        Route::get('administrator_module/{id}','Controllers\Administrator_Module_Controller@administrator_module');
+        Route::get('administrator_module','Controllers\Administrator_Module_Controller@administrator_module');
         Route::post('create_company_account','Controllers\Administrator_Module_Controller@create_company_account');
+        Route::post('create_coordinator_account','Controllers\Administrator_Module_Controller@create_coordinator_account');
         Route::get('company_accounts_list','Controllers\Administrator_Module_Controller@company_accounts_list');
 
         //HR_Controller
         Route::get('hr_application/{id}','Controllers\HR_Controller@hr_application');
-        Route::get('hr_view_application/{id}','Controllers\Company_Controller@hr_view_application');
-        Route::post('hr_set_interview/{id}','Controllers\Company_Controller@hr_set_interview');    
-        Route::get('hr_get_schedules/{id}','Controllers\Company_Controller@hr_get_schedules');    
-        Route::get('hr_hire_applicant/{id}','Controllers\Company_Controller@hr_hire_applicant');
-        Route::get('hr_intern_list/{id}','Controllers\Company_Controller@hr_intern_list');
-        Route::post('hr_interview_result/{id}','Controllers\Company_Controller@hr_interview_result');
-        Route::get('hr_eject_application/{id}','Controllers\Company_Controller@hr_reject_application');
+        // Route::get('hr_view_application/{id}','Controllers\HR_Controller@hr_view_application');
+        Route::get('hr_advertisement_list/{id}','Controllers\HR_Controller@hr_advertisement_list');
+          Route::get('hr_application_list/{id}','Controllers\HR_Controller@hr_application_list');
+        
+        // Route::post('hr_set_interview/{id}','Controllers\Company_Controller@hr_set_interview');    
+        // Route::get('hr_get_schedules/{id}','Controllers\Company_Controller@hr_get_schedules');    
+        // Route::get('hr_hire_applicant/{id}','Controllers\Company_Controller@hr_hire_applicant');
+        // Route::get('hr_intern_list/{id}','Controllers\Company_Controller@hr_intern_list');
+        // Route::post('hr_interview_result/{id}','Controllers\Company_Controller@hr_interview_result');
+        // Route::get('hr_eject_application/{id}','Controllers\Company_Controller@hr_reject_application');
 
 
         //SV_Controller
