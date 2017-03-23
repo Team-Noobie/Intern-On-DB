@@ -73,7 +73,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-         Schema::create('tbl_user_hr', function (Blueprint $table) {
+        Schema::create('tbl_user_hr', function (Blueprint $table) {
             $table->increments('id');
             $table->Integer('user_ID')->unique();  
             $table->Integer('company_id');
@@ -105,9 +105,7 @@ class CreateUsersTable extends Migration
 			$table->timestamps();
 		});
 
-        
-
-         Schema::create('tbl_application', function (Blueprint $table) {
+        Schema::create('tbl_application', function (Blueprint $table) {
 			$table->increments('id');
 			$table->Integer('student_id');
 			$table->Integer('ads_id');
@@ -116,19 +114,20 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 		});
 
-
         Schema::create('tbl_application_log', function (Blueprint $table) {
 			$table->increments('id');
-			$table->Integer('application_ID');           
+			$table->Integer('application_id');           
             $table->string('remarks',1000)->nullable();
             $table->string('status',50); 
             $table->string('reason',50);
             $table->date('interview_date');
-            $table->time('interview_time');            
+            $table->time('interview_time');
+            $table->Integer('hr_id')->nullable();
+            $table->string('interviewer_type',50);                        
             $table->timestamps();
 		});
 
-         Schema::create('tbl_company_interns', function (Blueprint $table) {
+        Schema::create('tbl_company_interns', function (Blueprint $table) {
 			$table->increments('id');
 			$table->Integer('company_id');
             $table->Integer('student_id');
@@ -150,11 +149,6 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-
-
-       
-
-
     }
     /**
      * Reverse the migrations.
@@ -169,7 +163,12 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('tbl_user_student');
         Schema::dropIfExists('tbl_advertisement');
         Schema::dropIfExists('tbl_application');
+        Schema::dropIfExists('tbl_user_hr');
+        Schema::dropIfExists('tbl_user_sv');
         Schema::dropIfExists('tbl_application_log');
+        Schema::dropIfExists('tbl_company_interns');
+        Schema::dropIfExists('tbl_sections');
+        Schema::dropIfExists('tbl_section_students');   
     }
 
 

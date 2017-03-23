@@ -11,9 +11,10 @@ class Application_Log extends Model
     protected $primaryKey = 'id';
 
     public function application(){
-        //  return $this->belongsTo('App\Models\Application','id','application_id');
         return $this->belongsTo('App\Models\Application','application_ID','id');
-
+    }
+    public function interviewer(){
+        return $this->hasOne('App\Models\User_HR','user_ID','hr_id');
     }
 
 }
