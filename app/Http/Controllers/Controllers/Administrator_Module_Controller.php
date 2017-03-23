@@ -13,12 +13,7 @@ use App\User;
 
 class Administrator_Module_Controller extends Controller
 {
-    //
-    public function administrator_module($id){
-        $user = User::find($id);
-        return response()->json($user->administrator);
-    }
-    
+    //   
 
     public function create_company_account(Request $request){
     		$user = new User;
