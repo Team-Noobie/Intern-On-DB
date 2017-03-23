@@ -34,6 +34,12 @@ class UsersTableSeeder extends Seeder
         $user3->type = 'coordinator';
         $user3->save();
 
+        $user4 = new User();
+        $user4->username = 'ADMIN';
+        $user4->password = bcrypt('ADMIN');
+        $user4->type = 'administrator';
+        $user4->save();
+
         $student = new User_Student();
         $student->user_ID = $user1->id;
         $student->student_firstname = 'Rian Kristoffer';
@@ -67,7 +73,14 @@ class UsersTableSeeder extends Seeder
 
         $coordinator = new User_Coordinator();
         $coordinator->user_ID = $user3->id;
-        $coordinator->coordinator_name = 'Mars Canita';
+        $coordinator->coordinator_firstname = 'Mars';
+        $coordinator->coordinator_lastname = 'Canita';
+        $coordinator->coordinator_department = 'Math';
+        $coordinator->coordinator_institute = 'IAS';
+        $coordinator->coordinator_school = 'FEU';
+        $coordinator->coordinator_contact_no = '09268121145';
+        $coordinator->coordinator_address = 'sampaloc manila';
+        $coordinator->coordinator_email = 'mvpcanita@gmail.com';
         $coordinator->save();
     }
 }

@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Storage;
 
-
-
 use App\Models\Advertisement;
 use App\Models\Application;
 use App\Models\Application_Log;
@@ -148,4 +146,6 @@ class Company_Controller extends Controller
         return response()->json($app_log);
         
     }
+
+    
 }

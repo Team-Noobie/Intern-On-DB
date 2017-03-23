@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Application;
 use App\Models\Application_Log;
