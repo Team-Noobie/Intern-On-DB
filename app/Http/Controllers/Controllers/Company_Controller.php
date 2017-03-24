@@ -11,7 +11,7 @@ use App\Models\Advertisement;
 use App\Models\Application;
 use App\Models\Application_Log;
 use App\Models\User_Company;
-use App\Models\Company_interns;
+use App\Models\Company_Interns;
 use App\User;
 
 class Company_Controller extends Controller
@@ -47,7 +47,6 @@ class Company_Controller extends Controller
 
     public function set_interview(Request $request,$id){
         $application = Application::find($id);
-        $application->status = "On-Process";
         $application->update();
 
         $app_log = new Application_Log; 
@@ -61,16 +60,16 @@ class Company_Controller extends Controller
     }
 
     public function get_schedules($id){
-        $schedules = DB::table('tbl_application')
-            ->join('tbl_application_log', 'tbl_application.id', '=', 'tbl_application_log.application_ID')
-            ->join('tbl_user_student', 'tbl_user_student.user_ID', '=', 'tbl_application.student_id')
-            ->join('tbl_advertisement', 'tbl_advertisement.id', '=', 'tbl_application.ads_id')            
-            ->select('tbl_application_log.id','tbl_user_student.student_firstname','tbl_user_student.student_lastname',
-            'tbl_application_log.reason','tbl_application_log.interview_date','tbl_application_log.interview_time'
-            ,'tbl_advertisement.ads_title')
-            ->where('tbl_application.company_id',$id)
-            ->where('tbl_application_log.status','Set')
-            ->get();
+        
+        $schedules = Application_Log::where('status','Set')->whereHas('application', function ($query) use ($id) {
+                        $query->where('company_id', $id);
+                    })->get();
+        foreach ($schedules as $log) {
+            $log->application;
+            $log->application->student;
+            $log->application->advertisement;
+        }
+
         return response()->json($schedules);
     }
 
@@ -81,7 +80,7 @@ class Company_Controller extends Controller
         $application->status = "For Hiring";
         $application->update();     
 
-        $intern = new Company_interns;
+        $intern = new Company_Interns;
         $intern->student_id = $application->student_id;
         $intern->company_id = $application->company_id;
         $intern->save();     

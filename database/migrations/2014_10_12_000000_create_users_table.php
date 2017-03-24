@@ -123,7 +123,7 @@ class CreateUsersTable extends Migration
             $table->date('interview_date');
             $table->time('interview_time');
             $table->Integer('hr_id')->nullable();
-            $table->string('interviewer_type',50);                        
+            $table->string('interviewer_type',50)->nullable();                        
             $table->timestamps();
 		});
 

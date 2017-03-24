@@ -14,13 +14,8 @@ use App\Models\Company_interns;
 class SV_Controller extends Controller
 {
     //
-    public function sv_interns($id){
+    public function sv_profile($id){
         $user = User::find($id);
         return response()->json($user->sv);
     }
-
-     public function Interns(){
-        return $this->hasMany('App\Models\Company_interns','company_id','user_ID');
-    }
-
 }

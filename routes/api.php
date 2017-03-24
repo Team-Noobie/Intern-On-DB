@@ -24,11 +24,11 @@ Route::group(['prefix' => 'internon'], function(){
 
         // Student_Controller
         Route::get('student_profile/{id}','Controllers\Student_Controller@student_profile');
-        Route::get('search_advertisement','Controllers\Student_Controller@search_advertisement');
+        Route::get('search_advertisement/{id}','Controllers\Student_Controller@search_advertisement');
         Route::get('student_view_advertisement/{id}','Controllers\Student_Controller@view_advertisement');        
-        Route::post('application_check','Controllers\Student_Controller@application_check');
         Route::post('apply','Controllers\Student_Controller@apply');
         Route::get('application_list/{id}','Controllers\Student_Controller@application_list');
+        Route::get('student_schedule/{id}','Controllers\Student_Controller@student_schedule');        
         Route::post('upload_resume','Controllers\Student_Controller@upload_resume');
         
         // Company_Controller
@@ -68,7 +68,7 @@ Route::group(['prefix' => 'internon'], function(){
 
 
         //SV_Controller
-         Route::get('sv_interns/{id}','Controllers\SV_Controller@sv_interns');
+        Route::get('sv_profile/{id}','Controllers\SV_Controller@sv_profile');
 
     });
 });
