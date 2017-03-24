@@ -56,6 +56,8 @@ Route::group(['prefix' => 'internon'], function(){
         Route::post('create_company_account','Controllers\Administrator_Module_Controller@create_company_account');
         Route::post('create_coordinator_account','Controllers\Administrator_Module_Controller@create_coordinator_account');
         Route::get('company_accounts_list','Controllers\Administrator_Module_Controller@company_accounts_list');
+        Route::get('coordinator_accounts_list','Controllers\Administrator_Module_Controller@coordinator_accounts_list');
+        
 
         //HR_Controller
         Route::get('hr_profile/{id}','Controllers\HR_Controller@hr_profile');

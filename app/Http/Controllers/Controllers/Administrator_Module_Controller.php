@@ -49,11 +49,15 @@ class Administrator_Module_Controller extends Controller
             return response()->json($request);
     }
 
-     public function company_accounts_list(){
+    public function company_accounts_list(){
         $company = User_Company::all();
         return response()->json($company);
     }
-
+    
+    public function coordinator_accounts_list(){
+        $coordinator = User_Coordinator::all();
+        return response()->json($coordinator);
+    }
 
 
 }
