@@ -45,36 +45,6 @@ class Company_Controller extends Controller
         return response()->json($advertisement);    
     }
 
-    public function advertisement_application_list($id){
-        $ads = Advertisement::where('company_id',$id)->get();
-        foreach ($ads as $ad) {
-            $ad->count = $ad->Application->count();
-        }
-        return response()->json($ads);
-    }
-
-    public function advertisement_applicant_list(Request $request,$id){
-
-        $applications = Application::where('ads_ID',$id)->where('status',$request->type)->get();       
-        foreach ($applications as $application) {
-            $application->student;
-        }
-
-        return response()->json($applications); 
-    }
-
-    public function view_application($id){
-        $application = Application::find($id);
-        $application->student;
-        $application->advertisement;
-        $application->logs;
-        if($application->status == "New"){
-            $application->status = "Pending";
-            $application->update();
-        }
-        return response()->json($application);         
-    }
-
     public function set_interview(Request $request,$id){
         $application = Application::find($id);
         $application->status = "On-Process";
@@ -120,6 +90,7 @@ class Company_Controller extends Controller
         $intern->student;
         return response()->json($intern);
     }
+
     public function reject_application($id){
         $application = Application::find($id);
         $application->student;
@@ -143,9 +114,19 @@ class Company_Controller extends Controller
         $app_log->remarks = $request->remarks;
         $app_log->status = "Done";
         $app_log->update();
-        return response()->json($app_log);
-        
+        return response()->json($app_log);  
     }
 
+    public function company_application_list($id){
+        $applications = Application::where('company_id',$id)->get();
+        foreach ($applications as $application) {
+            $application->student;
+            $application->logs;
+            $application->advertisement;
+            
+        }
+        return response()->json($applications);
+
+    }
     
 }
