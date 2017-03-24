@@ -16,7 +16,7 @@ use App\Models\Company_interns;
 class HR_Controller extends Controller
 {
     //
-    public function hr_application($id){
+    public function hr_profile($id){
         $user = User::find($id);
         return response()->json($user->hr);
     }
