@@ -12,6 +12,7 @@ class User_HR extends Model
     protected $hidden = ['id'];
     protected $primaryKey = 'user_ID';
 
-  
-
+    public function interviews(){
+        return $this->hasMany('App\Models\Application_Log','hr_id','user_ID');
+    }
 }
