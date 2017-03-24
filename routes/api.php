@@ -36,15 +36,14 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('company_advertisement_list/{id}','Controllers\Company_Controller@company_advertisement_list');
         Route::post('create_advertisement','Controllers\Company_Controller@create_advertisement');
         Route::get('company_view_advertisement/{id}','Controllers\Company_Controller@view_advertisement'); 
-        Route::get('advertisement_application_list/{id}','Controllers\Company_Controller@advertisement_application_list');
-        Route::post('advertisement_applicant_list/{id}','Controllers\Company_Controller@advertisement_applicant_list');
-        Route::get('view_application/{id}','Controllers\Company_Controller@view_application');
         Route::post('set_interview/{id}','Controllers\Company_Controller@set_interview');    
         Route::get('get_schedules/{id}','Controllers\Company_Controller@get_schedules');    
         Route::get('hire_applicant/{id}','Controllers\Company_Controller@hire_applicant');
         Route::get('intern_list/{id}','Controllers\Company_Controller@intern_list');
         Route::post('interview_result/{id}','Controllers\Company_Controller@interview_result');
         Route::get('reject_application/{id}','Controllers\Company_Controller@reject_application');
+        Route::get('company_application_list/{id}','Controllers\Company_Controller@company_application_list');
+        
 
         //Coordinator_Controller 
         Route::get('coordinator_profile/{id}','Controllers\Coordinator_Controller@coordinator_profile');

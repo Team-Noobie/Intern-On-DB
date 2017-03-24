@@ -12,7 +12,7 @@ class Application extends Model
 
 
     public function advertisement(){
-        return $this->belongsTo('App\Models\Advertisement','ads_id','id');
+        return $this->hasOne('App\Models\Advertisement','id','ads_id');
     }
 
     public function company(){
