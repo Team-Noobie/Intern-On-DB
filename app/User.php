@@ -40,4 +40,12 @@ class User extends Authenticatable
     public function coordinator(){
         return $this->hasOne('App\Models\User_Coordinator','user_ID','id');
     }
+
+    public function hr(){
+        return $this->hasOne('App\Models\User_HR','user_ID','id');
+    }
+    
+    public function sv(){
+        return $this->hasOne('App\Models\User_SV','user_ID','id');
+    }
 }
