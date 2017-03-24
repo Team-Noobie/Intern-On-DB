@@ -62,7 +62,7 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('hr_application/{id}','Controllers\HR_Controller@hr_application');
         // Route::get('hr_view_application/{id}','Controllers\HR_Controller@hr_view_application');
         Route::get('hr_advertisement_list/{id}','Controllers\HR_Controller@hr_advertisement_list');
-          Route::get('hr_application_list/{id}','Controllers\HR_Controller@hr_application_list');
+        Route::get('hr_application_list/{id}','Controllers\HR_Controller@hr_application_list');
         //SV_Controller
         Route::get('sv_profile/{id}','Controllers\SV_Controller@sv_profile');
 
