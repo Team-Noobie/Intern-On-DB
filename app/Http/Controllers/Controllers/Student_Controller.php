@@ -9,6 +9,7 @@ use Storage;
 
 use App\Models\Advertisement;
 use App\Models\Application;
+use App\Models\Application_Log;
 use App\Models\User_Student;
 use App\User;
 
@@ -20,11 +21,11 @@ class Student_Controller extends Controller
         return response()->json($user->student);
     }
 
-    public function search_advertisement(){
-        $advertisements = Advertisement::all();
-        foreach ($advertisements as $advertisement) {
-            $advertisement->Company;
-        }
+    public function search_advertisement($id){
+
+        $advertisements = Advertisement::whereDoesntHave('Application', function ($query) use ($id) {
+            $query->where('student_id', $id);
+        })->get();
         return response()->json($advertisements);    
     }
 
@@ -34,31 +35,12 @@ class Student_Controller extends Controller
         return response()->json($advertisement);    
     }
 
-
-    public function application_check(Request $request){
-        $advertisement = DB::table('tbl_advertisement')
-            ->join('tbl_application', 'tbl_advertisement.ID', '=', 'tbl_application.ads_id')
-            ->join('tbl_user_student', 'tbl_user_student.user_ID', '=', 'tbl_application.student_id')
-            ->select('*')
-            ->where('tbl_application.student_id',$request->student_id)
-            ->where('tbl_application.ads_id',$request->ad_id)
-            ->get();
-
-        if($advertisement->count() == 1){
-            $advertisement->hasApplied= true;
-        }
-        if($advertisement->count() == 0){
-            $advertisement->hasApplied =  false;
-        }
-        return response()->json($advertisement->hasApplied);       
-    }
-
     public function apply(Request $request){
             $app = new Application;
             $app->ads_id= $request->ad_id;
             $app->company_id= $request->company_id;
             $app->student_id= $request->student_id;
-            $app->status = 'New';
+            $app->status = 'Pending';
             $app->save();
             return response()->json($app);
     }
@@ -95,4 +77,15 @@ class Student_Controller extends Controller
         return response()->json($student);        
     }
     
+    public function student_schedule($id){
+        $schedules = Application_Log::where('status','Set')->whereHas('application', function ($query) use ($id) {
+                        $query->where('student_id', $id);
+                    })->get();
+        foreach ($schedules as $log) {
+            $log->application;
+            $log->application->company;
+            $log->application->advertisement;
+        }
+        return response()->json($schedules);
+    }
 }
