@@ -26,6 +26,9 @@ class Student_Controller extends Controller
         $advertisements = Advertisement::whereDoesntHave('Application', function ($query) use ($id) {
             $query->where('student_id', $id);
         })->get();
+         foreach ($advertisements as $advertisement) {
+            $advertisement->company;
+        }
         return response()->json($advertisements);    
     }
 
