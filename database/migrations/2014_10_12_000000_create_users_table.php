@@ -77,19 +77,20 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->Integer('user_ID')->unique();  
             $table->Integer('company_id');
-            $table->string('hr_firstname',50)->nullable();
-            $table->string('hr_lastname',50)->nullable();
-            $table->string('hr_email',50)->nullable();
+            $table->string('hr_firstname',50);
+            $table->string('hr_lastname',50);
+            $table->string('hr_email',50);
             $table->timestamps();
         });  
 
         Schema::create('tbl_user_sv', function (Blueprint $table) {
             $table->increments('id');
             $table->Integer('user_ID')->unique();
-            $table->Integer('company_id');            
-            $table->string('sv_firstname',50)->nullable();
-            $table->string('sv_lastname',50)->nullable();
-            $table->string('sv_email',50)->nullable();
+            $table->Integer('company_id');
+            $table->Integer('department_id');                                
+            $table->string('sv_firstname',50);
+            $table->string('sv_lastname',50);
+            $table->string('sv_email',50);
             $table->timestamps();
         });    
   
@@ -131,6 +132,7 @@ class CreateUsersTable extends Migration
 			$table->increments('id');
 			$table->Integer('company_id');
             $table->Integer('student_id');
+            $table->Integer('department_id');
             $table->timestamps();
 		});
         
@@ -146,6 +148,13 @@ class CreateUsersTable extends Migration
             $table->Integer('section_id');
             $table->Integer('student_id');
             $table->Integer('coordinator_id');
+            $table->timestamps();
+        });
+
+        Schema::create('tbl_company_departments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('company_id');
+            $table->string('department_name',20);
             $table->timestamps();
         });
 
@@ -167,6 +176,7 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('tbl_user_sv');
         Schema::dropIfExists('tbl_application_log');
         Schema::dropIfExists('tbl_company_interns');
+        Schema::dropIfExists('tbl_company_departments');
         Schema::dropIfExists('tbl_sections');
         Schema::dropIfExists('tbl_section_students');   
     }

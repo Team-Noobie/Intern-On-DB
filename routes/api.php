@@ -38,11 +38,17 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('company_view_advertisement/{id}','Controllers\Company_Controller@view_advertisement'); 
         Route::post('set_interview/{id}','Controllers\Company_Controller@set_interview');    
         Route::get('get_schedules/{id}','Controllers\Company_Controller@get_schedules');    
-        Route::get('hire_applicant/{id}','Controllers\Company_Controller@hire_applicant');
+        Route::post('hire_applicant/{id}','Controllers\Company_Controller@hire_applicant');
         Route::get('intern_list/{id}','Controllers\Company_Controller@intern_list');
         Route::post('interview_result/{id}','Controllers\Company_Controller@interview_result');
         Route::get('reject_application/{id}','Controllers\Company_Controller@reject_application');
         Route::get('company_application_list/{id}','Controllers\Company_Controller@company_application_list');
+        Route::get('department_list/{id}','Controllers\Company_Controller@department_list');                
+        Route::post('create_department/{id}','Controllers\Company_Controller@create_department');        
+        Route::get('hr_list/{id}','Controllers\Company_Controller@hr_list');
+        Route::post('create_hr/{id}','Controllers\Company_Controller@create_hr');                                        
+        Route::get('sv_list/{id}','Controllers\Company_Controller@sv_list');                
+        Route::post('create_sv/{id}','Controllers\Company_Controller@create_sv');                
         
 
         //Coordinator_Controller 

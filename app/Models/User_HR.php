@@ -15,4 +15,8 @@ class User_HR extends Model
     public function interviews(){
         return $this->hasMany('App\Models\Application_Log','hr_id','user_ID');
     }
+
+    public function Company(){
+        return $this->belongsTo('App\Models\User_Company','company_id','user_ID');
+    }
 }

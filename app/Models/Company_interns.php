@@ -17,4 +17,8 @@ class Company_Interns extends Model
     public function Student(){
          return $this->belongsTo('App\Models\User_Student','student_id','user_ID');
     }
+
+    public function Department(){
+        return $this->belongsTo('App\Models\Company_Department','department_id','id');
+    }
 }
