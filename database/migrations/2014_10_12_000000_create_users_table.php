@@ -100,7 +100,7 @@ class CreateUsersTable extends Migration
             $table->string('ads_title',50);
 			$table->string('ads_job_description',1000);
 			// $table->string('ads_tags',255);
-			$table->string('ads_contact',20);      
+			$table->string('ads_contact',50);      
 			$table->string('ads_work_location',200)->nullable();
 			$table->string('ads_visibility',10)->nullable();
 			$table->timestamps();
