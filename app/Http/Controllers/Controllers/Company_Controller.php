@@ -89,6 +89,7 @@ class Company_Controller extends Controller
         $intern->student_id = $application->student_id;
         $intern->company_id = $application->company_id;
         $intern->department_id = $request->department_id;
+        $intern->status = 'Active';
         $intern->save();     
 
         $intern->company;

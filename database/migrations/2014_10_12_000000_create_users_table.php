@@ -133,6 +133,7 @@ class CreateUsersTable extends Migration
 			$table->Integer('company_id');
             $table->Integer('student_id');
             $table->Integer('department_id');
+            $table->string('status')->nullable();            
             $table->timestamps();
 		});
         
