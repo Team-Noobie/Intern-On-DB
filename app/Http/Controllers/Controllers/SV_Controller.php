@@ -18,4 +18,12 @@ class SV_Controller extends Controller
         $user = User::find($id);
         return response()->json($user->sv);
     }
+
+    public function sv_intern_list($id){
+        $interns = Company_interns::where('department_id',$id)->get();
+        foreach ($interns as $intern) {
+            $intern->Student;
+        }
+        return response()->json($interns);        
+    }
 }

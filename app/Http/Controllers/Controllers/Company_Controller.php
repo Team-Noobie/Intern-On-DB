@@ -89,6 +89,7 @@ class Company_Controller extends Controller
         $intern->student_id = $application->student_id;
         $intern->company_id = $application->company_id;
         $intern->department_id = $request->department_id;
+        $intern->status = 'Active';
         $intern->save();     
 
         $intern->company;
@@ -120,11 +121,11 @@ class Company_Controller extends Controller
         $app_log->remarks = $request->remarks;
         $app_log->status = "Done";
         $app_log->update();
-        return response()->json($app_log);  
+        return response()->json($app_log); 
     }
 
     public function company_application_list($id){
-        $applications = Application::where('company_id',$id)->get();
+        $applications = Application::where('company_id',$id)->where('status','Pending')->get();
         foreach ($applications as $application) {
             $application->student;
             $application->logs;

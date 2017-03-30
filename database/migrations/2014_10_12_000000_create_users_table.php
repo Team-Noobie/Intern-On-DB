@@ -100,7 +100,7 @@ class CreateUsersTable extends Migration
             $table->string('ads_title',50);
 			$table->string('ads_job_description',1000);
 			// $table->string('ads_tags',255);
-			$table->string('ads_contact',20);      
+			$table->string('ads_contact',50);      
 			$table->string('ads_work_location',200)->nullable();
 			$table->string('ads_visibility',10)->nullable();
 			$table->timestamps();
@@ -133,6 +133,7 @@ class CreateUsersTable extends Migration
 			$table->Integer('company_id');
             $table->Integer('student_id');
             $table->Integer('department_id');
+            $table->string('status')->nullable();            
             $table->timestamps();
 		});
         
@@ -155,10 +156,36 @@ class CreateUsersTable extends Migration
         Schema::create('tbl_company_departments', function (Blueprint $table) {
             $table->increments('id');
             $table->Integer('company_id');
-            $table->string('department_name',20);
+            $table->string('department_name',60);
             $table->timestamps();
         });
 
+
+         Schema::create('tbl_grade', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('sv_id');
+            $table->Integer('company_id');
+            $table->string('comment',1000);
+            $table->timestamps();
+        });
+
+         Schema::create('tbl_reports', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('company_intern_id');
+            $table->string('reports',1000);
+            $table->timestamps();
+        });
+
+
+
+         Schema::create('tbl_timecard', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('company_intern_id');
+            $table->date('date')->nullable();
+            $table->string('hours',50);
+            $table->timestamps();
+
+        });
     }
     /**
      * Reverse the migrations.
@@ -180,6 +207,10 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('tbl_company_departments');
         Schema::dropIfExists('tbl_sections');
         Schema::dropIfExists('tbl_section_students');   
+        Schema::dropIfExists('tbl_grade');   
+        Schema::dropIfExists('tbl_reports');   
+        Schema::dropIfExists('tbl_timecard');   
+        
     }
 
 
