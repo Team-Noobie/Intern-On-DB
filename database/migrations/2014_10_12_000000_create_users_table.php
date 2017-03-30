@@ -138,6 +138,7 @@ class CreateUsersTable extends Migration
         
         Schema::create('tbl_sections', function (Blueprint $table) {
             $table->increments('id');
+            $table->Integer('coordinator_id');
             $table->string('section_code',20);
             $table->string('course_code',20);
             $table->timestamps();

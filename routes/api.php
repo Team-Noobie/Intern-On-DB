@@ -53,9 +53,10 @@ Route::group(['prefix' => 'internon'], function(){
 
         //Coordinator_Controller 
         Route::get('coordinator_profile/{id}','Controllers\Coordinator_Controller@coordinator_profile');
-        Route::post('create_student_section','Controllers\Coordinator_Controller@create_student_section');
-        Route::post('enroll_student','Controllers\Coordinator_Controller@enroll_student');
-        Route::get('section_list','Controllers\Coordinator_Controller@section_list');
+        Route::post('create_student_section/{id}','Controllers\Coordinator_Controller@create_student_section');
+        Route::post('enroll_student/{id}','Controllers\Coordinator_Controller@enroll_student');
+        Route::get('section_list/{id}','Controllers\Coordinator_Controller@section_list');
+        Route::get('view_section_students/{id}','Controllers\Coordinator_Controller@view_section_students');
 
         //Administrator_Controller
         Route::get('administrator_module','Controllers\Administrator_Module_Controller@administrator_module');
