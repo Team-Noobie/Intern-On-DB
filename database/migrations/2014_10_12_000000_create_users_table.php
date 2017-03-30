@@ -155,10 +155,36 @@ class CreateUsersTable extends Migration
         Schema::create('tbl_company_departments', function (Blueprint $table) {
             $table->increments('id');
             $table->Integer('company_id');
-            $table->string('department_name',20);
+            $table->string('department_name',60);
             $table->timestamps();
         });
 
+
+         Schema::create('tbl_grade', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('sv_id');
+            $table->Integer('company_id');
+            $table->string('comment',1000);
+            $table->timestamps();
+        });
+
+         Schema::create('tbl_reports', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('company_intern_id');
+            $table->string('reports',1000);
+            $table->timestamps();
+        });
+
+
+
+         Schema::create('tbl_timecard', function (Blueprint $table) {
+            $table->increments('id');
+            $table->Integer('company_intern_id');
+            $table->date('date')->nullable();
+            $table->string('hours',50);
+            $table->timestamps();
+
+        });
     }
     /**
      * Reverse the migrations.
@@ -180,6 +206,10 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('tbl_company_departments');
         Schema::dropIfExists('tbl_sections');
         Schema::dropIfExists('tbl_section_students');   
+        Schema::dropIfExists('tbl_grade');   
+        Schema::dropIfExists('tbl_reports');   
+        Schema::dropIfExists('tbl_timecard');   
+        
     }
 
 
