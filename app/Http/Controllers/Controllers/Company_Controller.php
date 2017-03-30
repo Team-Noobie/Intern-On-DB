@@ -10,9 +10,14 @@ use Storage;
 use App\Models\Advertisement;
 use App\Models\Application;
 use App\Models\Application_Log;
-use App\Models\User_Company;
 use App\Models\Company_Interns;
+use App\Models\Company_Department;
 use App\User;
+use App\Models\User_Company;
+use App\Models\User_HR;
+use App\Models\User_SV;
+
+
 
 class Company_Controller extends Controller
 {
@@ -60,7 +65,6 @@ class Company_Controller extends Controller
     }
 
     public function get_schedules($id){
-        
         $schedules = Application_Log::where('status','Set')->whereHas('application', function ($query) use ($id) {
                         $query->where('company_id', $id);
                     })->get();
@@ -73,16 +77,19 @@ class Company_Controller extends Controller
         return response()->json($schedules);
     }
 
-    public function hire_applicant($id){
+
+    public function hire_applicant(Request $request,$id){
         $application = Application::find($id);
         $application->student;
         $application->advertisement;
-        $application->status = "For Hiring";
+        $application->status = "Hired";
         $application->update();     
 
         $intern = new Company_Interns;
         $intern->student_id = $application->student_id;
         $intern->company_id = $application->company_id;
+        $intern->department_id = $request->department_id;
+        $intern->status = 'Active';
         $intern->save();     
 
         $intern->company;
@@ -104,6 +111,7 @@ class Company_Controller extends Controller
         $company = User_Company::find($id);
         foreach ($company->Interns as $intern) {
             $intern->student;
+            $intern->department;
         }
         return response()->json($company->Interns);
     }
@@ -113,11 +121,11 @@ class Company_Controller extends Controller
         $app_log->remarks = $request->remarks;
         $app_log->status = "Done";
         $app_log->update();
-        return response()->json($app_log);  
+        return response()->json($app_log); 
     }
 
     public function company_application_list($id){
-        $applications = Application::where('company_id',$id)->get();
+        $applications = Application::where('company_id',$id)->where('status','Pending')->get();
         foreach ($applications as $application) {
             $application->student;
             $application->logs;
@@ -125,7 +133,63 @@ class Company_Controller extends Controller
             
         }
         return response()->json($applications);
+    }
+    public function department_list($id){
+        $department = Company_Department::where('company_id',$id)->get();
+        return response()->json($department);
+    }
+    public function create_department(Request $request,$id){
+        $department = new Company_Department;
+        $department->company_id = $id;
+        $department->department_name = $request->department_name;
+        $department->save();
+        return response()->json($department);
+    }
+    public function hr_list($id){
+        $hr_list = User_HR::where('company_id',$id)->get();
+        return response()->json($hr_list);
+    }
+    public function sv_list($id){
+        $sv_list = User_SV::where('company_id',$id)->get();
+        foreach ($sv_list as $list) {
+            $list->department;
+        }
+        return response()->json($sv_list);
+    }
+    public function create_hr(Request $request,$id){
+        $user = new User;
+        $user->username = $request->hr_username;
+        $user->password = bcrypt("changeme");
+        $user->type = "hr";
+        $user->save();
 
+        $hr = new User_HR;
+        $hr->user_ID = $user->id;
+        $hr->company_id = $id;        
+        $hr->hr_firstname = $request->hr_firstname;
+        $hr->hr_lastname = $request->hr_lastname;
+        $hr->hr_email = $request->hr_email;
+        $hr->save();
+
+    }
+    public function create_sv(Request $request,$id){
+        $user = new User;
+        $user->username = $request->sv_username;
+        $user->password = bcrypt("changeme");
+        $user->type = "sv";
+        $user->save();
+
+        $sv = new User_sv;
+        $sv->user_ID = $user->id;
+        $sv->company_id = $id;
+        $sv->department_id = $request->department_id;      
+        $sv->sv_firstname = $request->sv_firstname;
+        $sv->sv_lastname = $request->sv_lastname;
+        $sv->sv_email = $request->sv_email;
+        $sv->save();
+
+        return response()->json($sv);
+        
     }
     
 }

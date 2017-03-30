@@ -42,17 +42,17 @@ class UsersTableSeeder extends Seeder
         $user4->type = 'administrator';
         $user4->save();
 
-        $user5 = new User();
-        $user5->username = 'hr';
-        $user5->password = bcrypt('123');
-        $user5->type = 'hr';
-        $user5->save();
+        // $user5 = new User();
+        // $user5->username = 'hr';
+        // $user5->password = bcrypt('123');
+        // $user5->type = 'hr';
+        // $user5->save();
 
-        $user6 = new User();
-        $user6->username = 'sv';
-        $user6->password = bcrypt('123');
-        $user6->type = 'sv';
-        $user6->save();
+        // $user6 = new User();
+        // $user6->username = 'sv';
+        // $user6->password = bcrypt('123');
+        // $user6->type = 'sv';
+        // $user6->save();
 
         $student = new User_Student();
         $student->user_ID = $user1->id;
@@ -98,20 +98,20 @@ class UsersTableSeeder extends Seeder
         $coordinator->save();
 
 
-        $hr = new User_HR();
-        $hr->user_ID = $user5->id;
-        $hr->company_id = $user2->id;        
-        $hr->hr_firstname = "HR" ;
-        $hr->hr_lastname = "HR";
-        $hr->hr_email = "HR@gmail.com";
-        $hr->save();
+        // $hr = new User_HR();
+        // $hr->user_ID = $user5->id;
+        // $hr->company_id = $user2->id;        
+        // $hr->hr_firstname = "HR" ;
+        // $hr->hr_lastname = "HR";
+        // $hr->hr_email = "HR@gmail.com";
+        // $hr->save();
 
-        $sv = new User_SV();
-        $sv->user_ID = $user6->id;
-        $sv->company_id = $user2->id;        
-        $sv->sv_firstname = "SV" ;
-        $sv->sv_lastname = "SV";
-        $sv->sv_email = "SV@gmail.com";
-        $sv->save();
+        // $sv = new User_SV();
+        // $sv->user_ID = $user6->id;
+        // $sv->company_id = $user2->id;        
+        // $sv->sv_firstname = "SV" ;
+        // $sv->sv_lastname = "SV";
+        // $sv->sv_email = "SV@gmail.com";
+        // $sv->save();
     }
 }
