@@ -75,7 +75,9 @@ Route::group(['prefix' => 'internon'], function(){
 
         //SV_Controller
         Route::get('sv_profile/{id}','Controllers\SV_Controller@sv_profile');
-        Route::get('sv_intern_list/{id}','Controllers\SV_Controller@sv_intern_list');        
+        Route::get('sv_intern_list/{id}','Controllers\SV_Controller@sv_intern_list');
+        Route::post('sv_report/{id}','Controllers\SV_Controller@sv_report');        
+                
 
     });
 });

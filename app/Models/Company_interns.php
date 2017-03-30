@@ -21,4 +21,14 @@ class Company_Interns extends Model
     public function Department(){
         return $this->belongsTo('App\Models\Company_Department','department_id','id');
     }
+
+    public function Reports(){
+        return $this->hasMany('App\Models\Reports','company_intern_id','id');
+    }
+
+    public function Timecard(){
+        return $this->hasMany('App\Models\Timecard','company_intern_id','id');
+    }
+
+
 }
