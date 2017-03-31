@@ -35,7 +35,7 @@ class CreateUsersTable extends Migration
             $table->string('company_spoken_lang',50)->nullable();
             $table->string('company_industry',50)->nullable();
             $table->string('company_job_salary',50)->nullable();
-            $table->string('company_benefits',50)->nullable();
+            $table->string('company_benefits',300)->nullable();
             $table->string('company_why_join_us',1000)->nullable();
             $table->string('company_logo',250)->nullable();
             $table->timestamps();
@@ -141,7 +141,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->Integer('coordinator_id');
             $table->string('section_code',20);
-            $table->string('course_code',20);
+            // $table->string('course_code',20);
             $table->timestamps();
         });
         
