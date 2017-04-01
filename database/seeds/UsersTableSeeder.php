@@ -19,19 +19,19 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user1 = new User();
-        $user1->username = 'rian';
+        $user1->username = 'student';
         $user1->password = bcrypt('123');
         $user1->type = 'student';
         $user1->save();
 
         $user2 = new User();
-        $user2->username = 'company1';
+        $user2->username = 'company';
         $user2->password = bcrypt('123');
         $user2->type = 'company';
         $user2->save();
 
         $user3 = new User();
-        $user3->username = 'coordinator2';
+        $user3->username = 'coordinator';
         $user3->password = bcrypt('123');
         $user3->type = 'coordinator';
         $user3->save();

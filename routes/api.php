@@ -36,13 +36,13 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('company_advertisement_list/{id}','Controllers\Company_Controller@company_advertisement_list');
         Route::post('create_advertisement','Controllers\Company_Controller@create_advertisement');
         Route::get('company_view_advertisement/{id}','Controllers\Company_Controller@view_advertisement'); 
-        Route::post('set_interview/{id}','Controllers\Company_Controller@set_interview');    
-        Route::get('get_schedules/{id}','Controllers\Company_Controller@get_schedules');    
-        Route::post('hire_applicant/{id}','Controllers\Company_Controller@hire_applicant');
-        Route::get('intern_list/{id}','Controllers\Company_Controller@intern_list');
-        Route::post('interview_result/{id}','Controllers\Company_Controller@interview_result');
-        Route::get('reject_application/{id}','Controllers\Company_Controller@reject_application');
-        Route::get('company_application_list/{id}','Controllers\Company_Controller@company_application_list');
+        // Route::post('set_interview/{id}','Controllers\Company_Controller@set_interview');    
+        // Route::get('get_schedules/{id}','Controllers\Company_Controller@get_schedules');    
+        // Route::post('hire_applicant/{id}','Controllers\Company_Controller@hire_applicant');
+        // Route::get('intern_list/{id}','Controllers\Company_Controller@intern_list');
+        // Route::post('interview_result/{id}','Controllers\Company_Controller@interview_result');
+        // Route::get('reject_application/{id}','Controllers\Company_Controller@reject_application');
+        // Route::get('company_application_list/{id}','Controllers\Company_Controller@company_application_list');
         Route::get('department_list/{id}','Controllers\Company_Controller@department_list');                
         Route::post('create_department/{id}','Controllers\Company_Controller@create_department');        
         Route::get('hr_list/{id}','Controllers\Company_Controller@hr_list');
@@ -68,16 +68,25 @@ Route::group(['prefix' => 'internon'], function(){
 
         //HR_Controller
         Route::get('hr_profile/{id}','Controllers\HR_Controller@hr_profile');
-        Route::get('hr_application/{id}','Controllers\HR_Controller@hr_application');
-        // Route::get('hr_view_application/{id}','Controllers\HR_Controller@hr_view_application');
-        Route::get('hr_advertisement_list/{id}','Controllers\HR_Controller@hr_advertisement_list');
-        Route::get('hr_application_list/{id}','Controllers\HR_Controller@hr_application_list');
-
+        Route::get('company_application_list/{id}','Controllers\HR_Controller@company_application_list');
+        Route::get('company_application_list/{id}','Controllers\HR_Controller@company_application_list');
+        Route::get('get_schedules/{id}','Controllers\HR_Controller@get_schedules');    
+        Route::get('intern_list/{id}','Controllers\HR_Controller@intern_list');
+        Route::post('hire_applicant/{id}','Controllers\HR_Controller@hire_applicant');
+        Route::get('reject_application/{id}','Controllers\HR_Controller@reject_application');
+        Route::post('set_interview/{id}','Controllers\HR_Controller@set_interview');    
+        Route::post('interview_result/{id}','Controllers\HR_Controller@interview_result');
+        
+        
         //SV_Controller
         Route::get('sv_profile/{id}','Controllers\SV_Controller@sv_profile');
         Route::get('sv_intern_list/{id}','Controllers\SV_Controller@sv_intern_list');
         Route::post('sv_report/{id}','Controllers\SV_Controller@sv_report');        
-                
+        Route::get('reset_password/{id}',function($id){
+                $User = User::find($id);
+                $User->password = bcrypt('changeme');
+                // return response()->json($User);        
+        });        
 
     });
 });
