@@ -17,6 +17,11 @@ class Student_Controller extends Controller
     //
     public function student_profile($id){
         $user = User::find($id);
+        $user->student;
+        $user->student->section;
+        $user->student->section->coordinator;
+        
+        
         return response()->json($user->student);
     }
 
