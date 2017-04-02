@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use Storage;
 
 use App\Models\Advertisement;
@@ -18,6 +17,11 @@ class Student_Controller extends Controller
     //
     public function student_profile($id){
         $user = User::find($id);
+        $user->student;
+        $user->student->section;
+        $user->student->section->coordinator;
+        
+        
         return response()->json($user->student);
     }
 

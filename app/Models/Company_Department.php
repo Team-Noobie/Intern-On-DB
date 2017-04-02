@@ -14,5 +14,9 @@ class Company_Department extends Model
         return $this->belongsTo('App\Models\User_Company','company_id','user_ID');
     }
 
+    public function Employees(){
+        return $this->hasMany('App\Models\User_SV','department_id','id');
+    }
+
     
 }
