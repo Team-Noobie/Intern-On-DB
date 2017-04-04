@@ -37,6 +37,7 @@ class Company_Controller extends Controller
             // $ad->ads_requirement = $request->ad_requirements;
             $ad->ads_job_description = $request->ad_description;
             $ad->ads_work_location = $request->ad_location;
+            $ad->ads_related_industry = $request->ad_related_industry;
             $ad->ads_contact = $request->ad_contacts;
             $ad->ads_visibility = "Hide";
             $ad->save();

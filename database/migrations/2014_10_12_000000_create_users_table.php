@@ -100,7 +100,8 @@ class CreateUsersTable extends Migration
             $table->string('ads_title',50);
 			$table->string('ads_job_description',1000);
 			// $table->string('ads_tags',255);
-			$table->string('ads_contact',50);      
+			$table->string('ads_contact',50)->nullable(); 
+            $table->strig('ads_related_industry',200)->nullable();     
 			$table->string('ads_work_location',200)->nullable();
 			$table->string('ads_visibility',10)->nullable();
 			$table->timestamps();
@@ -133,6 +134,7 @@ class CreateUsersTable extends Migration
 			$table->Integer('company_id');
             $table->Integer('student_id');
             $table->Integer('department_id');
+            $table->Integer('required_hours');
             $table->string('status')->nullable();            
             $table->timestamps();
 		});

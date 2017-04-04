@@ -62,6 +62,8 @@ class Coordinator_Controller extends Controller
             $student->user_ID = $user->id;
             $student->student_firstname = $request->student_firstname;
             $student->student_lastname = $request->student_lastname;
+            $student->student_email = $request->student_email;
+            $student->student_contact_no = $request->student_contact_no;
             $student->save();
 
             $section = new Section_Students;
