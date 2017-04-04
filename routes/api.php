@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +77,7 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('reject_application/{id}','Controllers\HR_Controller@reject_application');
         Route::post('set_interview/{id}','Controllers\HR_Controller@set_interview');    
         Route::post('interview_result/{id}','Controllers\HR_Controller@interview_result');
-        
+        Route::post('update_timecard','Controllers\HR_Controller@update_timecard');
         
         //SV_Controller
         Route::get('sv_profile/{id}','Controllers\SV_Controller@sv_profile');
@@ -85,8 +86,22 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('reset_password/{id}',function($id){
                 $User = User::find($id);
                 $User->password = bcrypt('changeme');
-                // return response()->json($User);        
-        });        
+                $User->update();
+                return response()->json('Reset');        
+        });
+
+        Route::post('edit_password/{id}',function(Request $request,$id){
+            $User = User::find($id);
+            if (Hash::check($request->old_password, $User->password)) {
+                $User->password = bcrypt($request->new_password);
+                $User->save();
+                return response()->json("Changed");        
+            }else{
+                return response()->json("Incorrect Old Password");                        
+            }
+        });
+
+
 
     });
 });

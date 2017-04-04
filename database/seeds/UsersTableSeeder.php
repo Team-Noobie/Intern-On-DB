@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user1 = new User();
-        $user1->username = 'student';
+        $user1->username = 'feu_student';
         $user1->password = bcrypt('123');
         $user1->type = 'student';
         $user1->save();
@@ -73,6 +73,7 @@ class UsersTableSeeder extends Seeder
         $company = new User_Company();
         $company->user_ID = $user2->id;
         $company->company_name = 'afrotecH Industry';
+        $company->company_symbol = 'AFI';        
         $company->company_overview = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati nemo amet quo adipisci, tempora dolore suscipit earum provident aperiam voluptatum. Placeat tempore nam velit, nostrum sint architecto, iure nesciunt et.';
         $company->company_contact_no = '926-8-629';
         $company->company_address = '#123 ADB Dr. Jose San Pedro St. Pasig City';
@@ -90,6 +91,7 @@ class UsersTableSeeder extends Seeder
         $coordinator->user_ID = $user3->id;
         $coordinator->coordinator_firstname = 'Mars';
         $coordinator->coordinator_lastname = 'Canita';
+        $coordinator->coordinator_symbol = 'feu';
         $coordinator->coordinator_department = 'Math';
         $coordinator->coordinator_institute = 'IAS';
         $coordinator->coordinator_school = 'FEU';

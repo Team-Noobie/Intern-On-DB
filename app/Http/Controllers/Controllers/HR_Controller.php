@@ -15,6 +15,7 @@ use App\User;
 use App\Models\User_Company;
 use App\Models\User_HR;
 use App\Models\User_SV;
+use App\Models\Timecards;
 
 
 class HR_Controller extends Controller
@@ -65,6 +66,7 @@ class HR_Controller extends Controller
         foreach ($company->Interns as $intern) {
             $intern->student;
             $intern->department;
+            $intern->Timecard;
         }
         return response()->json($company->Interns);
     }
@@ -74,8 +76,7 @@ class HR_Controller extends Controller
         foreach ($applications as $application) {
             $application->student;
             $application->logs;
-            $application->advertisement;
-            
+            $application->advertisement;    
         }
         return response()->json($applications);
     }
@@ -93,6 +94,7 @@ class HR_Controller extends Controller
         $intern->department_id = $request->department_id;
         $intern->required_hours = $request->required_hours;
         $intern->status = 'Active';
+        $intern->rendered_hours = 0;
         $intern->save();     
 
         $intern->company;
@@ -108,5 +110,19 @@ class HR_Controller extends Controller
         $application->update();
 
         return response()->json($application);
+    }
+    public function update_timecard(Request $request){
+        $timecard = new Timecards;
+        $timecard->company_intern_id = $request->company_intern_id;        
+        $timecard->hr_id = $request->hr_id;
+        $timecard->date = $request->date;
+        $timecard->time_in = $request->time_in;
+        $timecard->time_out = $request->time_out;
+        $timecard->hours_render = $request->hours_render;        
+        $timecard->save();
+
+        $intern = Company_Interns::find($request->company_intern_id);
+        $intern->rendered_hours = $intern->Timecard->sum('hours_render');
+        $intern->update();
     }
 }

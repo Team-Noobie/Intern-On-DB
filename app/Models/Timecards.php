@@ -9,4 +9,5 @@ class Timecards extends Model
     //
     protected $table = 'tbl_timecards';
     protected $primaryKey = 'id';
+    
 }

@@ -27,8 +27,7 @@ class Company_Interns extends Model
     }
 
     public function Timecard(){
-        return $this->hasMany('App\Models\Timecard','company_intern_id','id');
+        return $this->hasMany('App\Models\Timecards','company_intern_id','id');
     }
-
 
 }
