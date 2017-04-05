@@ -31,6 +31,7 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('application_list/{id}','Controllers\Student_Controller@application_list');
         Route::get('student_schedule/{id}','Controllers\Student_Controller@student_schedule');        
         Route::post('upload_resume','Controllers\Student_Controller@upload_resume');
+        Route::post('edit_student_profile/{id}','Controllers\Student_Controller@edit_student_profile');
         
         // Company_Controller
         Route::get('company_profile/{id}','Controllers\Company_Controller@company_profile');
