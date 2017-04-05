@@ -51,6 +51,7 @@ class Company_Controller extends Controller
         foreach ($company->Interns as $intern) {
             $intern->student;
             $intern->department;
+            $intern->Timecard;
         }
         return response()->json($company->Interns);
     }
@@ -110,9 +111,7 @@ class Company_Controller extends Controller
         $sv->sv_lastname = $request->sv_lastname;
         $sv->sv_email = $request->sv_email;
         $sv->save();
-
-        return response()->json($sv);
-        
+        return response()->json($sv);      
     }
     
 }

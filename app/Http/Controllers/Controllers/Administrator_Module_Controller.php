@@ -28,6 +28,7 @@ class Administrator_Module_Controller extends Controller
             $company = new User_Company;
             $company->user_ID = $user->id;
             $company->company_name = $request->company_name;
+            $company->company_symbol = $request->company_symbol;            
             $company->save();
 
             return response()->json($request);
@@ -44,6 +45,7 @@ class Administrator_Module_Controller extends Controller
             $coordinator->user_ID = $user->id;
             $coordinator->coordinator_firstname = $request->coordinator_firstname;
             $coordinator->coordinator_lastname = $request->coordinator_lastname;
+            $coordinator->coordinator_symbol = $request->coordinator_symbol;
             $coordinator->save();
 
             return response()->json($request);

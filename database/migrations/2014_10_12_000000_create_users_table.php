@@ -26,7 +26,8 @@ class CreateUsersTable extends Migration
         Schema::create('tbl_user_company', function (Blueprint $table) {
             $table->increments('id');
             $table->Integer('user_ID')->unique();
-            $table->string('company_name',50)->nullable();
+            $table->string('company_name',50);
+            $table->string('company_symbol',5)->unique();            
             $table->string('company_overview',1000)->nullable();
             $table->string('company_contact_no',50)->nullable();
             $table->string('company_address',100)->nullable();
@@ -46,6 +47,7 @@ class CreateUsersTable extends Migration
             $table->Integer('user_ID')->unique();
             $table->string('coordinator_firstname',30);
             $table->string('coordinator_lastname',30);
+            $table->string('coordinator_symbol',5)->unique();
             $table->string('coordinator_department',50)->nullable();
             $table->string('coordinator_institute',50)->nullable();
             $table->string('coordinator_school',50)->nullable();
@@ -133,7 +135,9 @@ class CreateUsersTable extends Migration
 			$table->Integer('company_id');
             $table->Integer('student_id');
             $table->Integer('department_id');
-            $table->string('status')->nullable();            
+            $table->Integer('required_hours');            
+            $table->string('status')->nullable();
+            $table->Integer('rendered_hours')->nullable();
             $table->timestamps();
 		});
         
@@ -183,8 +187,10 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->Integer('company_intern_id');
             $table->Integer('hr_id');            
-            $table->date('date')->nullable();
-            $table->string('hours',50);
+            $table->date('date');
+            $table->time('time_in');
+            $table->time('time_out');            
+            $table->Integer('hours_render');
             $table->timestamps();
 
         });
