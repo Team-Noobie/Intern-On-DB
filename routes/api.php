@@ -37,19 +37,17 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('company_advertisement_list/{id}','Controllers\Company_Controller@company_advertisement_list');
         Route::post('create_advertisement','Controllers\Company_Controller@create_advertisement');
         Route::get('company_view_advertisement/{id}','Controllers\Company_Controller@view_advertisement'); 
-        // Route::post('set_interview/{id}','Controllers\Company_Controller@set_interview');    
-        // Route::get('get_schedules/{id}','Controllers\Company_Controller@get_schedules');    
-        // Route::post('hire_applicant/{id}','Controllers\Company_Controller@hire_applicant');
-        // Route::get('intern_list/{id}','Controllers\Company_Controller@intern_list');
-        // Route::post('interview_result/{id}','Controllers\Company_Controller@interview_result');
-        // Route::get('reject_application/{id}','Controllers\Company_Controller@reject_application');
-        // Route::get('company_application_list/{id}','Controllers\Company_Controller@company_application_list');
         Route::get('department_list/{id}','Controllers\Company_Controller@department_list');                
         Route::post('create_department/{id}','Controllers\Company_Controller@create_department');        
         Route::get('hr_list/{id}','Controllers\Company_Controller@hr_list');
         Route::post('create_hr/{id}','Controllers\Company_Controller@create_hr');                                        
         Route::get('sv_list/{id}','Controllers\Company_Controller@sv_list');                
-        Route::post('create_sv/{id}','Controllers\Company_Controller@create_sv');                
+        Route::post('create_sv/{id}','Controllers\Company_Controller@create_sv');
+        Route::post('toggle_ads_visibility/{id}','Controllers\Company_Controller@toggle_ads_visibility');
+        Route::post('delete_account/{id}','Controllers\Company_Controller@delete_account');
+        
+
+                                                
         
 
         //Coordinator_Controller 
@@ -70,7 +68,6 @@ Route::group(['prefix' => 'internon'], function(){
         //HR_Controller
         Route::get('hr_profile/{id}','Controllers\HR_Controller@hr_profile');
         Route::get('company_application_list/{id}','Controllers\HR_Controller@company_application_list');
-        Route::get('company_application_list/{id}','Controllers\HR_Controller@company_application_list');
         Route::get('get_schedules/{id}','Controllers\HR_Controller@get_schedules');    
         Route::get('intern_list/{id}','Controllers\HR_Controller@intern_list');
         Route::post('hire_applicant/{id}','Controllers\HR_Controller@hire_applicant');
@@ -89,7 +86,6 @@ Route::group(['prefix' => 'internon'], function(){
                 $User->update();
                 return response()->json('Reset');        
         });
-
         Route::post('edit_password/{id}',function(Request $request,$id){
             $User = User::find($id);
             if (Hash::check($request->old_password, $User->password)) {

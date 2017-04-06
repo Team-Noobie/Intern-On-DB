@@ -26,10 +26,9 @@ class Student_Controller extends Controller
     }
 
     public function search_advertisement($id){
-
         $advertisements = Advertisement::whereDoesntHave('Application', function ($query) use ($id) {
             $query->where('student_id', $id);
-        })->get();
+        })->where('ads_visibility','Show')->get();
         foreach ($advertisements as $advertisement) {
             $advertisement->company;
         }

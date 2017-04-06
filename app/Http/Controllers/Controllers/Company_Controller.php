@@ -114,4 +114,29 @@ class Company_Controller extends Controller
         return response()->json($sv);      
     }
     
+    public function toggle_ads_visibility(Request $request,$id){
+        $ads = Advertisement::find($id);
+        $ads->ads_visibility = $request->toggle;
+        $ads->update();
+        return response()->json($request->toggle);      
+    }
+
+    public function edit_company_profile(Request $request,$id){
+        $company = User_Company::find($id);
+        $company->update();
+    }
+
+    public function delete_account(Request $request,$id){
+        $User = User::find($id);
+        $User->delete();
+        if($request->account_type == 'HR'){ 
+            $HR = User_HR::find($id);
+            $HR->delete();
+        }
+
+        if($request->account_type == 'SV'){ 
+            $SV = User_SV::find($id);
+            $SV->delete();         
+        }
+    }
 }

@@ -178,6 +178,7 @@ class CreateUsersTable extends Migration
             $table->Integer('company_intern_id');
             $table->Integer('sv_id');
             $table->string('report',1000);
+            $table->date('report_date');
             $table->timestamps();
         });
 

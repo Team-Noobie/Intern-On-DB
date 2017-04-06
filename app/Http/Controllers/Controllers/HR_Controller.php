@@ -44,6 +44,7 @@ class HR_Controller extends Controller
         $app_log = Application_Log::find($id);
         $app_log->remarks = $request->remarks;
         $app_log->status = "Done";
+        $app_log->hr_id = $request->hr_id;
         $app_log->update();
         return response()->json($app_log); 
     }
@@ -76,6 +77,9 @@ class HR_Controller extends Controller
         foreach ($applications as $application) {
             $application->student;
             $application->logs;
+            foreach ($application->logs as $logs) {
+                $logs->interviewer;
+            }
             $application->advertisement;    
         }
         return response()->json($applications);
