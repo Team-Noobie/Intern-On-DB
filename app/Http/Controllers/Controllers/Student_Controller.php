@@ -107,4 +107,17 @@ class Student_Controller extends Controller
         return response()->json($interns);
     
     }
+    public function edit_student_profile(Request $request,$id){
+        $student = User_Student::find($id);
+        $student->student_firstname= $request->student_firstname;
+        $student->student_lastname= $request->student_lastname;
+        $student->student_contact_no= $request->student_contact_no;
+        $student->student_email= $request->student_email;
+        $student->student_address= $request->student_address;
+        $student->student_birthday= $request->student_birthday;
+        $student->student_gender= $request->student_gender;
+                
+        $student->update();
+        return response()->json($student);    
+    }
 }
