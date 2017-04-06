@@ -49,7 +49,8 @@ Route::group(['prefix' => 'internon'], function(){
         Route::post('create_department/{id}','Controllers\Company_Controller@create_department');        
         Route::get('hr_list/{id}','Controllers\Company_Controller@hr_list');
         Route::post('create_hr/{id}','Controllers\Company_Controller@create_hr');                                        
-        Route::get('sv_list/{id}','Controllers\Company_Controller@sv_list');                
+        Route::get('sv_list/{id}','Controllers\Company_Controller@sv_list');  
+        Route::post('toggle_ads_visibility/{id}','Controllers\Company_Controller@toggle_ads_visibility');               
         Route::post('create_sv/{id}','Controllers\Company_Controller@create_sv');                
         
 

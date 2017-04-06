@@ -44,6 +44,9 @@ class Student_Controller extends Controller
         $student->student_contact_no= $request->student_contact_no;
         $student->student_email= $request->student_email;
         $student->student_address= $request->student_address;
+        $student->student_birthday= $request->student_birthday;
+        $student->student_gender= $request->student_gender;
+                
         $student->update();
         return response()->json($student);    
     }

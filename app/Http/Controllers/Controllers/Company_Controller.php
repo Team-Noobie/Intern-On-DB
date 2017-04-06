@@ -114,5 +114,11 @@ class Company_Controller extends Controller
         $sv->save();
         return response()->json($sv);      
     }
+     public function toggle_ads_visibility(Request $request,$id){
+        $ads =  Advertisement::find($id);
+        $ads->ads_visibility = $request->toggle;
+        $ads->update();
+        return response()->json($ads);  
+     }
     
 }
