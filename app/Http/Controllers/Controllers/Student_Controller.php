@@ -22,7 +22,6 @@ class Student_Controller extends Controller
         $user->student->section;
         $user->student->section->coordinator;
         
-        
         return response()->json($user->student);
     }
 
@@ -38,7 +37,7 @@ class Student_Controller extends Controller
 
     public function view_advertisement($id){
         $advertisement = Advertisement::find($id);
-        $advertisement->Company;
+        $advertisement->company;
         return response()->json($advertisement);    
     }
 
@@ -116,7 +115,7 @@ class Student_Controller extends Controller
         $student->student_address= $request->student_address;
         $student->student_birthday= $request->student_birthday;
         $student->student_gender= $request->student_gender;
-                
+        $student->student_course= $request->student_course;
         $student->update();
         return response()->json($student);    
     }

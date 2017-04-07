@@ -81,5 +81,18 @@ class Coordinator_Controller extends Controller
             return response()->json($request);
     }
 
+
+    public function edit_coordinator_profile(Request $request,$id){
+        $coordinator = User_coordinator::find($id);
+        $coordinator->coordinator_email= $request->coordinator_email;
+        $coordinator->coordinator_contact_no= $request->coordinator_contact_no;
+        $coordinator->coordinator_address= $request->coordinator_address;
+        $coordinator->coordinator_department= $request->coordinator_department;
+        $coordinator->coordinator_institute= $request->coordinator_institute;
+        $coordinator->coordinator_school= $request->coordinator_school;
+        $coordinator->update();
+        return response()->json($coordinator);    
+    }
+
     
 }

@@ -129,4 +129,16 @@ class HR_Controller extends Controller
         $intern->rendered_hours = $intern->Timecard->sum('hours_render');
         $intern->update();
     }
+    public function edit_hr_profile(Request $request,$id){
+        $hr = User_HR::find($id);
+        $hr->hr_firstname= $request->hr_firstname;
+        $hr->hr_lastname= $request->hr_lastname;
+        $hr->hr_email= $request->hr_email;
+        $hr->hr_contact_no= $request->hr_contact_no;
+        $hr->hr_address= $request->hr_address;
+       
+        $hr->update();
+        return response()->json($hr);    
+    }
+
 }
