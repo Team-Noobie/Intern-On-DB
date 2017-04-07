@@ -27,4 +27,8 @@ class User_Student extends Model
         return $this->hasOne('App\Models\Company_interns','student_id','user_ID');
     }
 
+    public function Grade(){
+        return $this->hasOne('App\Models\Grades','student_id','user_ID');
+    }
+
 }

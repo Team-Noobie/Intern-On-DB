@@ -89,7 +89,9 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('sv_profile/{id}','Controllers\SV_Controller@sv_profile');
         Route::get('sv_intern_list/{id}','Controllers\SV_Controller@sv_intern_list');
         Route::post('sv_report/{id}','Controllers\SV_Controller@sv_report'); 
+        Route::post('grade_intern','Controllers\SV_Controller@grade_intern'); 
         Route::post('edit_sv_profile/{id}','Controllers\SV_Controller@edit_sv_profile');
+
         // Settings    
         Route::get('reset_password/{id}',function($id){
                 $User = User::find($id);
