@@ -24,7 +24,10 @@ Route::group(['prefix' => 'internon'], function(){
     
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('auth','Auth\AuthController@getAuthenticatedUser');    
-
+        //Guest Controller    
+        // Route::get('search_advertisement','Controllers\Guest_Controller@search_advertisement');
+        // Route::get('student_view_advertisement','Controllers\Guest_Controller@view_advertisement');        
+        
         // Student_Controller
         Route::get('student_profile/{id}','Controllers\Student_Controller@student_profile');
         Route::get('search_advertisement/{id}','Controllers\Student_Controller@search_advertisement');
@@ -34,6 +37,7 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('student_schedule/{id}','Controllers\Student_Controller@student_schedule'); 
         Route::get('student_timecard/{id}','Controllers\Student_Controller@student_timecard');                       
         Route::post('upload_resume','Controllers\Student_Controller@upload_resume');
+        Route::post('edit_student_profile/{id}','Controllers\Student_Controller@edit_student_profile');
         
         // Company_Controller
         Route::get('company_profile/{id}','Controllers\Company_Controller@company_profile');
@@ -48,8 +52,8 @@ Route::group(['prefix' => 'internon'], function(){
         Route::post('create_sv/{id}','Controllers\Company_Controller@create_sv');
         Route::post('toggle_ads_visibility/{id}','Controllers\Company_Controller@toggle_ads_visibility');
         Route::post('delete_account/{id}','Controllers\Company_Controller@delete_account');
+        Route::post('edit_company_profile/{id}','Controllers\Company_Controller@edit_company_profile');
         
-
                                                 
         
 
@@ -59,6 +63,7 @@ Route::group(['prefix' => 'internon'], function(){
         Route::post('enroll_student/{id}','Controllers\Coordinator_Controller@enroll_student');
         Route::get('section_list/{id}','Controllers\Coordinator_Controller@section_list');
         Route::get('view_section_students/{id}','Controllers\Coordinator_Controller@view_section_students');
+        Route::post('edit_coordinator_profile/{id}','Controllers\Coordinator_Controller@edit_coordinator_profile');
 
         //Administrator_Controller
         Route::get('administrator_module','Controllers\Administrator_Module_Controller@administrator_module');
@@ -78,13 +83,14 @@ Route::group(['prefix' => 'internon'], function(){
         Route::post('set_interview/{id}','Controllers\HR_Controller@set_interview');    
         Route::post('interview_result/{id}','Controllers\HR_Controller@interview_result');
         Route::post('update_timecard','Controllers\HR_Controller@update_timecard');
+        Route::post('edit_hr_profile/{id}','Controllers\HR_Controller@edit_hr_profile');
         
         //SV_Controller
         Route::get('sv_profile/{id}','Controllers\SV_Controller@sv_profile');
         Route::get('sv_intern_list/{id}','Controllers\SV_Controller@sv_intern_list');
         Route::post('sv_report/{id}','Controllers\SV_Controller@sv_report'); 
         Route::post('grade_intern','Controllers\SV_Controller@grade_intern'); 
-
+        Route::post('edit_sv_profile/{id}','Controllers\SV_Controller@edit_sv_profile');
 
         // Settings    
         Route::get('reset_password/{id}',function($id){

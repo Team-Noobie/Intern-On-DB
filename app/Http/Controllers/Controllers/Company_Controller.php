@@ -36,6 +36,7 @@ class Company_Controller extends Controller
             $ad->ads_title = $request->ad_title;
             // $ad->ads_requirement = $request->ad_requirements;
             $ad->ads_job_description = $request->ad_description;
+            $ad->ads_related_industry = $request->ad_related_industry;
             $ad->ads_work_location = $request->ad_location;
             $ad->ads_contact = $request->ad_contacts;
             $ad->ads_visibility = "Hide";
@@ -123,7 +124,17 @@ class Company_Controller extends Controller
 
     public function edit_company_profile(Request $request,$id){
         $company = User_Company::find($id);
+        $company->company_email= $request->company_email;
+        $company->company_contact_no= $request->company_contact_no;
+        $company->company_address= $request->company_address;
+        $company->company_overview= $request->company_overview;
+        $company->company_industry= $request->company_industry;
+        $company->company_website= $request->company_website;
+        $company->company_benefits= $request->company_benefits;
+        $company->company_spoken_lang= $request->company_spoken_lang;
+        $company->company_why_join_us= $request->company_why_join_us;
         $company->update();
+        return response()->json($company);    
     }
 
     public function delete_account(Request $request,$id){

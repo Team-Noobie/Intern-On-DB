@@ -81,7 +81,10 @@ class CreateUsersTable extends Migration
             $table->Integer('company_id');
             $table->string('hr_firstname',50);
             $table->string('hr_lastname',50);
-            $table->string('hr_email',50);
+            $table->string('hr_contact_no',50)->nullable();
+            $table->string('hr_email',50)->nullable();
+            $table->string('hr_address',100)->nullable();
+            
             $table->timestamps();
         });  
 
@@ -92,7 +95,9 @@ class CreateUsersTable extends Migration
             $table->Integer('department_id');                                
             $table->string('sv_firstname',50);
             $table->string('sv_lastname',50);
-            $table->string('sv_email',50);
+            $table->string('sv_email',50)->nullable();
+            $table->string('sv_contact_no',50)->nullable();
+            $table->string('sv_address',100)->nullable();
             $table->timestamps();
         });    
   

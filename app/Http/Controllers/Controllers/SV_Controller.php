@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 
 use App\User;
-use App\Models\User_HR;
+use App\Models\User_SV;
 use App\Models\User_Company;
 use App\Models\Company_Interns;
 use App\Models\Reports;
@@ -43,7 +43,6 @@ class SV_Controller extends Controller
         $report->save();
         return response()->json($report);        
     }
-
     public function grade_intern(Request $request){
         $grade = new Grades;
         $grade->sv_id = $request->sv_id;
@@ -58,4 +57,15 @@ class SV_Controller extends Controller
         $grade->save();
     }
 
+     public function edit_sv_profile(Request $request,$id){
+        $sv = User_SV::find($id);
+        $sv->sv_firstname= $request->sv_firstname;
+        $sv->sv_lastname= $request->sv_lastname;
+        $sv->sv_email= $request->sv_email;
+        $sv->sv_contact_no= $request->sv_contact_no;
+        $sv->sv_address= $request->sv_address;
+       
+        $sv->update();
+        return response()->json($sv);    
+    }
 }
