@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+// use Storage;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -101,6 +103,9 @@ Route::group(['prefix' => 'internon'], function(){
         });
 
 
+        // Upload
+        Route::post('upload_pic','Controllers\Upload@upload_pic');
 
+        
     });
 });

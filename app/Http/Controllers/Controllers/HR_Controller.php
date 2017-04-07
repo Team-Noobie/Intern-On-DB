@@ -80,7 +80,8 @@ class HR_Controller extends Controller
             foreach ($application->logs as $logs) {
                 $logs->interviewer;
             }
-            $application->advertisement;    
+            $application->advertisement;          
+            
         }
         return response()->json($applications);
     }

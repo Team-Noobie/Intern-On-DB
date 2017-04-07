@@ -11,6 +11,9 @@ use App\Models\User_Coordinator;
 use App\Models\User_Student;
 use App\Models\Section;
 use App\Models\Section_Students;
+use App\Models\Timecards;
+use App\Models\Company_interns;
+
 use App\User;
 
 class Coordinator_Controller extends Controller
@@ -44,7 +47,12 @@ class Coordinator_Controller extends Controller
     public function view_section_students($id){
         $sectionStudents = Section_Students::where('section_id',$id)->get();
         foreach ($sectionStudents as $sectionStudent) {
-            $sectionStudent->Students;
+            $sectionStudent->student;
+            // $sectionStudent->Intern;
+            $sectionStudent->Intern = Company_interns::where('student_id',$sectionStudent->student_id)->get();
+            foreach ($sectionStudent->Intern as $intern) {
+                $intern->Timecard;
+            }
         }
         return response()->json($sectionStudents);
     }

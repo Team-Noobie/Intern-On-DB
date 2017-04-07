@@ -62,7 +62,6 @@ class Student_Controller extends Controller
     }
 
     public function upload_resume(Request $request){
-        
         $student = User_Student::find($request->id);
         if($student->resume == ""){
             Storage::put('resume/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
@@ -83,6 +82,10 @@ class Student_Controller extends Controller
 
         return response()->json($student);        
     }
+
+
+
+
     
     public function student_schedule($id){
         $schedules = Application_Log::where('status','Set')->whereHas('application', function ($query) use ($id) {

@@ -23,4 +23,8 @@ class User_Student extends Model
         return $this->hasOne('App\Models\Section_Students','student_id','user_ID');
     }
 
+    public function Intern(){
+        return $this->hasOne('App\Models\Company_interns','student_id','user_ID');
+    }
+
 }
