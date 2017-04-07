@@ -169,7 +169,12 @@ class CreateUsersTable extends Migration
          Schema::create('tbl_grades', function (Blueprint $table) {
             $table->increments('id');
             $table->Integer('sv_id');
-            $table->Integer('company_id');
+            $table->Integer('student_id');
+            $table->Intern('grade');
+            $table->Intern('punctuality');
+            $table->Intern('effectiveness');            
+            $table->Intern('competence');
+            $table->Intern('pr');            
             $table->string('comment',1000);
             $table->timestamps();
         });

@@ -11,7 +11,7 @@ use App\Models\User_HR;
 use App\Models\User_Company;
 use App\Models\Company_Interns;
 use App\Models\Reports;
-
+use App\Models\Grades;
 
 class SV_Controller extends Controller
 {
@@ -42,6 +42,20 @@ class SV_Controller extends Controller
         $report->report_date = $request->date;
         $report->save();
         return response()->json($report);        
+    }
+
+    public function grade_intern(Request $request){
+        $grade = new Grades;
+        $grade->sv_id = $request->sv_id;
+        $grade->student_id = $request->student_id;
+        $grade->grade = $request->grade;
+        $grade->punctuality = $request->punctuality;
+        $grade->competence = $request->competence;
+        $grade->effectiveness = $request->effectiveness;
+        $grade->cooperation = $request->cooperation;
+        $grade->pr = $request->pr;
+        $grade->comment = $request->comment;
+        $grade->save();
     }
 
 }

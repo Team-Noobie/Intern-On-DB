@@ -48,6 +48,7 @@ class Coordinator_Controller extends Controller
         $sectionStudents = Section_Students::where('section_id',$id)->get();
         foreach ($sectionStudents as $sectionStudent) {
             $sectionStudent->student;
+            $sectionStudent->student->grade;
             // $sectionStudent->Intern;
             $sectionStudent->Intern = Company_interns::where('student_id',$sectionStudent->student_id)->get();
             foreach ($sectionStudent->Intern as $intern) {
