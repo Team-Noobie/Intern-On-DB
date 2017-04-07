@@ -22,4 +22,5 @@ class User_Student extends Model
     public function Section(){
         return $this->hasOne('App\Models\Section_Students','student_id','user_ID');
     }
+
 }

@@ -113,7 +113,8 @@ class CreateUsersTable extends Migration
 			$table->Integer('student_id');
 			$table->Integer('ads_id');
 			$table->Integer('company_id');
-            $table->string('status',255);   
+            $table->string('status',255);
+            $table->string('remarks',1000)->nullable();                  
             $table->timestamps();
 		});
 

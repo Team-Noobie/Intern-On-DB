@@ -26,6 +26,7 @@ class SV_Controller extends Controller
         foreach ($interns as $intern) {
             $intern->Student;
             $intern->Reports;
+            $intern->Timecard;
             foreach($intern->Reports as $Report){
                 $Report->Supervisor;
             }
@@ -38,8 +39,9 @@ class SV_Controller extends Controller
         $report->company_intern_id = $id;
         $report->report = $request->report;
         $report->sv_id = $request->sv_id;
+        $report->report_date = $request->date;
         $report->save();
         return response()->json($report);        
-        
     }
+
 }

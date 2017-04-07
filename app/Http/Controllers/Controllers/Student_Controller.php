@@ -10,6 +10,7 @@ use App\Models\Advertisement;
 use App\Models\Application;
 use App\Models\Application_Log;
 use App\Models\User_Student;
+use App\Models\Company_interns;
 use App\User;
 
 class Student_Controller extends Controller
@@ -93,5 +94,14 @@ class Student_Controller extends Controller
             $log->application->advertisement;
         }
         return response()->json($schedules);
+    }
+
+    public function student_timecard($id){
+        $interns = Company_interns::where('student_id',$id)->get();
+        foreach ($interns as $intern) {
+            $intern->Timecard;
+        }
+        return response()->json($interns);
+    
     }
 }

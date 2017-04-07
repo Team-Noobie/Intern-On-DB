@@ -73,7 +73,7 @@ class HR_Controller extends Controller
     }
 
     public function company_application_list($id){
-        $applications = Application::where('company_id',$id)->where('status','Pending')->get();
+        $applications = Application::where('company_id',$id)->where('status', '<>', 'Hired')->get();
         foreach ($applications as $application) {
             $application->student;
             $application->logs;
@@ -106,11 +106,10 @@ class HR_Controller extends Controller
         return response()->json($intern);
     }
 
-    public function reject_application($id){
+    public function reject_application(Request $request,$id){
         $application = Application::find($id);
-        $application->student;
-        $application->advertisement;
         $application->status = "Failed";
+        $application->remarks = $request->remarks;
         $application->update();
 
         return response()->json($application);

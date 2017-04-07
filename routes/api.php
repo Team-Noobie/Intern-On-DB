@@ -29,7 +29,8 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('student_view_advertisement/{id}','Controllers\Student_Controller@view_advertisement');        
         Route::post('apply','Controllers\Student_Controller@apply');
         Route::get('application_list/{id}','Controllers\Student_Controller@application_list');
-        Route::get('student_schedule/{id}','Controllers\Student_Controller@student_schedule');        
+        Route::get('student_schedule/{id}','Controllers\Student_Controller@student_schedule'); 
+        Route::get('student_timecard/{id}','Controllers\Student_Controller@student_timecard');                       
         Route::post('upload_resume','Controllers\Student_Controller@upload_resume');
         
         // Company_Controller
@@ -71,7 +72,7 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('get_schedules/{id}','Controllers\HR_Controller@get_schedules');    
         Route::get('intern_list/{id}','Controllers\HR_Controller@intern_list');
         Route::post('hire_applicant/{id}','Controllers\HR_Controller@hire_applicant');
-        Route::get('reject_application/{id}','Controllers\HR_Controller@reject_application');
+        Route::post('reject_application/{id}','Controllers\HR_Controller@reject_application');
         Route::post('set_interview/{id}','Controllers\HR_Controller@set_interview');    
         Route::post('interview_result/{id}','Controllers\HR_Controller@interview_result');
         Route::post('update_timecard','Controllers\HR_Controller@update_timecard');
@@ -79,7 +80,9 @@ Route::group(['prefix' => 'internon'], function(){
         //SV_Controller
         Route::get('sv_profile/{id}','Controllers\SV_Controller@sv_profile');
         Route::get('sv_intern_list/{id}','Controllers\SV_Controller@sv_intern_list');
-        Route::post('sv_report/{id}','Controllers\SV_Controller@sv_report');        
+        Route::post('sv_report/{id}','Controllers\SV_Controller@sv_report'); 
+
+        // Settings    
         Route::get('reset_password/{id}',function($id){
                 $User = User::find($id);
                 $User->password = bcrypt('changeme');
