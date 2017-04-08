@@ -54,6 +54,7 @@ class CreateUsersTable extends Migration
             $table->string('coordinator_contact_no',30)->nullable();
             $table->string('coordinator_address',50)->nullable();
             $table->string('coordinator_email',50)->nullable();
+            $table->string('coordinator_pic',200)->nullable();
             $table->timestamps();
         });
 
@@ -72,6 +73,7 @@ class CreateUsersTable extends Migration
             $table->string('student_department',50)->nullable();
             $table->string('student_institute',50)->nullable();
             $table->string('student_school',50)->nullable();  
+            $table->string('student_pic',200)->nullable();  
             $table->string('resume',50)->nullable()->nullable();
             $table->timestamps();
         });

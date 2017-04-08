@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\User_Company;
 use App\Models\User_Student;
+use App\Models\User_Coordinator;
 use App\Models\User_HR;
 use App\Models\User_SV;
 use Storage;
@@ -58,7 +59,29 @@ class Upload extends Controller
         }
         
 
-        return response()->json($Company);        
+        return response()->json($Student);        
     }
+     public function upload_coordinator_pic(Request $request){
+        $Coordinator = User_Coordinator::find($request->id);
+        if($Coordinator->Coordinator_pic == ""){
+            Storage::put('pictures/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
+                file_get_contents($request->file('file')->getRealPath())
+            );
+            $Coordinator->coordinator_pic = $request->file('file')->getClientOriginalName();
+            $Coordinator->update();
+        }else{
+            Storage::delete('pictures/'.$request->id.'/'.$Coordinator->coordinator_pic);
+
+            Storage::put('pictures/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
+                file_get_contents($request->file('file')->getRealPath())
+            );
+            $Coordinator->coordinator_pic = $request->file('file')->getClientOriginalName();
+            $Coordinator->update();
+        }
+        
+
+        return response()->json($Coordinator);        
+    }
+
 
 }

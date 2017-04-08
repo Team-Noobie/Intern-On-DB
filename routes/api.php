@@ -122,5 +122,6 @@ Route::group(['prefix' => 'internon'], function(){
         // Upload
         Route::post('upload_pic','Controllers\Upload@upload_pic');
         Route::post('upload_student_pic','Controllers\Upload@upload_student_pic');
+        Route::post('upload_coordinator_pic','Controllers\Upload@upload_coordinator_pic');   
     });
 });
