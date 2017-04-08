@@ -66,7 +66,6 @@ class Coordinator_Controller extends Controller
 
 
     public function enroll_student(Request $request,$id){
-        
     		$user = new User;
     		$user->username = $request->student_username;
     		$user->password = bcrypt("changeme");
@@ -86,6 +85,52 @@ class Coordinator_Controller extends Controller
             $section->save();
             
             return response()->json($request);
+    }
+
+    public function enroll_batch_student(Request $request,$id){
+        foreach ($request->students as $intern) {
+            $user = new User;
+    		$user->username = $intern['username'];
+    		$user->password = bcrypt("changeme");
+    		$user->type = "student";
+    		$user->save();
+
+            $student = new User_Student;
+            $student->user_ID = $user->id;
+            $student->student_firstname = $intern['firstname'];
+            $student->student_lastname = $intern['lastname'];
+            $student->student_firstname = $intern['email'];
+            $student->student_firstname = $intern['contact_no'];
+            $student->save();
+
+            $section = new Section_Students;
+            $section->student_id = $user->id;
+            $section->coordinator_id = $id;
+            $section->section_id = $request->section_id;
+            $section->save();
+        }
+        // for($x = 0; count($request->students);$x++){
+        //     return response()->json($request->students[0]);
+               
+        //     // $user = new User;
+    	// 	// $user->username = $request->students[$x]->username;
+    	// 	// $user->password = bcrypt("changeme");
+    	// 	// $user->type = "student";
+    	// 	// $user->save();
+
+        //     // $student = new User_Student;
+        //     // $student->user_ID = $user->id;
+        //     // $student->student_firstname = $request->students[$x]->firstname;
+        //     // $student->student_lastname = $request->students[$x]->lastname;
+        //     // $student->save();
+
+        //     // $section = new Section_Students;
+        //     // $section->student_id = $user->id;
+        //     // $section->coordinator_id = $id;
+        //     // $section->section_id = $request->section_id;
+        //     // $section->save();
+        // }
+        // return response()->json($request->students[0]);
     }
 
 
