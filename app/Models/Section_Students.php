@@ -12,7 +12,7 @@ class Section_Students extends Model
 
     public function student(){
          return $this->hasOne('App\Models\User_Student','user_ID','student_id');
-    }
+    }   
     public function coordinator(){
          return $this->hasOne('App\Models\User_Coordinator','user_ID','coordinator_id');
     }
