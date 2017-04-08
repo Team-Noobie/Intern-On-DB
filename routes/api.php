@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Models\Advertisement;
+
 // use Storage;
 
 /*
@@ -20,8 +22,11 @@ use App\User;
 //     $advertisement = Adverstisement::all();
 // });
 Route::group(['prefix' => 'internon'], function(){
+    Route::post('all_ads',function(Request $request){
+        $ads = Advertisement::where('ads_title', 'LIKE', $request->search)->get();
+        return response()->json($ads);                        
+    });
     Route::post('auth','Auth\AuthController@authenticate');
-    
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('auth','Auth\AuthController@getAuthenticatedUser');    
         //Guest Controller    
@@ -64,6 +69,9 @@ Route::group(['prefix' => 'internon'], function(){
         Route::get('section_list/{id}','Controllers\Coordinator_Controller@section_list');
         Route::get('view_section_students/{id}','Controllers\Coordinator_Controller@view_section_students');
         Route::post('edit_coordinator_profile/{id}','Controllers\Coordinator_Controller@edit_coordinator_profile');
+        Route::post('enroll_batch_student/{id}','Controllers\Coordinator_Controller@enroll_batch_student');
+        
+        
 
         //Administrator_Controller
         Route::get('administrator_module','Controllers\Administrator_Module_Controller@administrator_module');
@@ -114,9 +122,6 @@ Route::group(['prefix' => 'internon'], function(){
         // Upload
         Route::post('upload_pic','Controllers\Upload@upload_pic');
         Route::post('upload_student_pic','Controllers\Upload@upload_student_pic');
-        Route::post('upload_coordinator_pic','Controllers\Upload@upload_coordinator_pic');
-        
-
-        
+        Route::post('upload_coordinator_pic','Controllers\Upload@upload_coordinator_pic');   
     });
 });
