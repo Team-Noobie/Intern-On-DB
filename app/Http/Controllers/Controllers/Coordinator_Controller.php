@@ -99,8 +99,8 @@ class Coordinator_Controller extends Controller
             $student->user_ID = $user->id;
             $student->student_firstname = $intern['firstname'];
             $student->student_lastname = $intern['lastname'];
-            $student->student_firstname = $intern['email'];
-            $student->student_firstname = $intern['contact_no'];
+            $student->student_email = $intern['email'];
+            $student->student_contact_no = $intern['contact_no'];
             $student->save();
 
             $section = new Section_Students;

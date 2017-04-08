@@ -74,7 +74,7 @@ class HR_Controller extends Controller
     }
 
     public function company_application_list($id){
-        $applications = Application::where('company_id',$id)->where('status', '<>', 'Hired')->get();
+        $applications = Application::where('company_id',$id)->where('status', '<>', 'Hired')->where('status', '<>', 'Already Hired')->get();
         foreach ($applications as $application) {
             $application->student;
             $application->logs;
@@ -110,6 +110,14 @@ class HR_Controller extends Controller
 
         $intern->company;
         $intern->student;
+
+
+        $pending_applications = Application::where('student_id',$application->student_id)->where('id','<>',$id)->where('status','<>','Failed')->get();
+            foreach ($pending_applications as $pending_application) {
+                $pending_application->status = "Already Hired";
+                $pending_application->update();
+            }        
+
         return response()->json($intern);
     }
 
