@@ -79,6 +79,11 @@ class HR_Controller extends Controller
             $application->logs;
             foreach ($application->logs as $logs) {
                 $logs->interviewer;
+                if($logs->status == "Set"){
+                    $application->hasSched = true;
+                }else{
+                    $application->hasSched = false;
+                }
             }
             $application->advertisement;          
             

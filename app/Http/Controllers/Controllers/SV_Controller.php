@@ -18,6 +18,7 @@ class SV_Controller extends Controller
     //
     public function sv_profile($id){
         $user = User::find($id);
+        $user->sv->company;
         return response()->json($user->sv);
     }
 

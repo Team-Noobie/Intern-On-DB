@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 
 use App\Models\User_Company;
+use App\Models\User_Student;
 use App\Models\User_HR;
 use App\Models\User_SV;
 use Storage;
@@ -37,4 +38,27 @@ class Upload extends Controller
 
         return response()->json($Company);        
     }
+
+    public function upload_student_pic(Request $request){
+        $Student = User_Student::find($request->id);
+        if($Student->Student_pic == ""){
+            Storage::put('pictures/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
+                file_get_contents($request->file('file')->getRealPath())
+            );
+            $Student->student_pic = $request->file('file')->getClientOriginalName();
+            $Student->update();
+        }else{
+            Storage::delete('pictures/'.$request->id.'/'.$Student->student_pic);
+
+            Storage::put('pictures/'.$request->id.'/'.$request->file('file')->getClientOriginalName(),
+                file_get_contents($request->file('file')->getRealPath())
+            );
+            $Student->student_pic = $request->file('file')->getClientOriginalName();
+            $Student->update();
+        }
+        
+
+        return response()->json($Company);        
+    }
+
 }

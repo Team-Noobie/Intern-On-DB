@@ -13,6 +13,8 @@ use App\Models\Section;
 use App\Models\Section_Students;
 use App\Models\Timecards;
 use App\Models\Company_interns;
+use App\Models\Reports;
+
 
 use App\User;
 
@@ -51,6 +53,10 @@ class Coordinator_Controller extends Controller
             $sectionStudent->student->grade;
             // $sectionStudent->Intern;
             $sectionStudent->Intern = Company_interns::where('student_id',$sectionStudent->student_id)->get();
+            foreach ($sectionStudent->Intern  as $intern) {
+                $sectionStudent->Reports = Reports::where('company_intern_id',$intern->id)->get();
+            }
+            
             foreach ($sectionStudent->Intern as $intern) {
                 $intern->Timecard;
             }
