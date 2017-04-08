@@ -106,7 +106,7 @@ class CreateUsersTable extends Migration
 			$table->Integer('company_id');
             $table->string('ads_title',50);
 			$table->string('ads_job_description',1000);
-			// $table->string('ads_tags',255);
+			$table->string('ads_related_industry',255);
 			$table->string('ads_contact',50);      
 			$table->string('ads_work_location',200)->nullable();
 			$table->string('ads_visibility',10)->nullable();
@@ -175,11 +175,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->Integer('sv_id');
             $table->Integer('student_id');
-            $table->Intern('grade');
-            $table->Intern('punctuality');
-            $table->Intern('effectiveness');            
-            $table->Intern('competence');
-            $table->Intern('pr');            
+            $table->Integer('grade');
+            $table->Integer('punctuality');
+            $table->Integer('effectiveness');            
+            $table->Integer('competence');
+            $table->Integer('pr');            
             $table->string('comment',1000);
             $table->timestamps();
         });

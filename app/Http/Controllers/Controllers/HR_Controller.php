@@ -23,6 +23,7 @@ class HR_Controller extends Controller
     //
     public function hr_profile($id){
         $user = User::find($id);
+         $user->hr->company;
         return response()->json($user->hr);
     }
 

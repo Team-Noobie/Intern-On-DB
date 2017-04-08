@@ -130,16 +130,6 @@ class UsersTableSeeder extends Seeder
 
 
         
-        for($x = 0; $x<50; $x++){
-            $ad = new Advertisement;
-            $ad->company_id = 2;
-            $ad->ads_title = "Ads" + $x;
-            // $ad->ads_requirement = $request->ad_requirements;
-            $ad->ads_job_description = "Ads Description" + $x;
-            $ad->ads_work_location = "Ads Location" + $x;
-            $ad->ads_contact = "Ads Contact" + $x;
-            $ad->ads_visibility = "Show";
-            $ad->save();
-        }
+       
     }
 }

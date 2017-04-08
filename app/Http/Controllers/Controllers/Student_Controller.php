@@ -21,7 +21,6 @@ class Student_Controller extends Controller
         $user->student;
         $user->student->section;
         $user->student->section->coordinator;
-        
         return response()->json($user->student);
     }
 
