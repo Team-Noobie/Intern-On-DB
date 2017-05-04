@@ -67,27 +67,40 @@ class Coordinator_Controller extends Controller
 
     public function enroll_student(Request $request,$id){
     		$user = new User;
-    		$user->username = $request->student_username;
-    		$user->password = bcrypt("changeme");
-    		$user->type = "student";
-    		$user->save();
+            if (User::where('Username', '=', $request->student_username)->exists()) {
+                // user found
+                return response()->json("Username Not Available");
+                
+            }else{
+                $user->username = $request->student_username;            
+                $user->password = bcrypt("changeme");
+                $user->type = "student";
+                $user->save();
 
-            $student = new User_Student;
-            $student->user_ID = $user->id;
-            $student->student_firstname = $request->student_firstname;
-            $student->student_lastname = $request->student_lastname;
-            $student->save();
+                $student = new User_Student;
+                $student->user_ID = $user->id;
+                $student->student_firstname = $request->student_firstname;
+                $student->student_lastname = $request->student_lastname;
+                $student->save();
 
-            $section = new Section_Students;
-            $section->student_id = $user->id;
-            $section->coordinator_id = $id;
-            $section->section_id = $request->section_id;
-            $section->save();
-            
-            return response()->json($request);
+                $section = new Section_Students;
+                $section->student_id = $user->id;
+                $section->coordinator_id = $id;
+                $section->section_id = $request->section_id;
+                $section->save();
+            }
+            return response()->json("Enrolled");
     }
 
     public function enroll_batch_student(Request $request,$id){
+        foreach ($request->students as $intern) {
+            if (User::where('Username', '=', $intern['username'])->exists()) {
+                // user found
+                return response()->json($intern['username'] . " has already been enrolled");
+                break;
+            }
+        }    
+
         foreach ($request->students as $intern) {
             $user = new User;
     		$user->username = $intern['username'];
@@ -109,28 +122,7 @@ class Coordinator_Controller extends Controller
             $section->section_id = $request->section_id;
             $section->save();
         }
-        // for($x = 0; count($request->students);$x++){
-        //     return response()->json($request->students[0]);
-               
-        //     // $user = new User;
-    	// 	// $user->username = $request->students[$x]->username;
-    	// 	// $user->password = bcrypt("changeme");
-    	// 	// $user->type = "student";
-    	// 	// $user->save();
-
-        //     // $student = new User_Student;
-        //     // $student->user_ID = $user->id;
-        //     // $student->student_firstname = $request->students[$x]->firstname;
-        //     // $student->student_lastname = $request->students[$x]->lastname;
-        //     // $student->save();
-
-        //     // $section = new Section_Students;
-        //     // $section->student_id = $user->id;
-        //     // $section->coordinator_id = $id;
-        //     // $section->section_id = $request->section_id;
-        //     // $section->save();
-        // }
-        // return response()->json($request->students[0]);
+        return response()->json("Uploaded");
     }
 
 

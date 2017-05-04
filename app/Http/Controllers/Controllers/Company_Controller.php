@@ -83,36 +83,47 @@ class Company_Controller extends Controller
     }
     public function create_hr(Request $request,$id){
         $user = new User;
-        $user->username = $request->hr_username;
-        $user->password = bcrypt("changeme");
-        $user->type = "hr";
-        $user->save();
+        if (User::where('Username', '=', $request->hr_username)->exists()) {
+                // user found
+                return response()->json("Username Not Available");
+                
+        }else{
+            $user->username = $request->hr_username;
+            $user->password = bcrypt("changeme");
+            $user->type = "hr";
+            $user->save();
 
-        $hr = new User_HR;
-        $hr->user_ID = $user->id;
-        $hr->company_id = $id;        
-        $hr->hr_firstname = $request->hr_firstname;
-        $hr->hr_lastname = $request->hr_lastname;
-        $hr->hr_email = $request->hr_email;
-        $hr->save();
-
+            $hr = new User_HR;
+            $hr->user_ID = $user->id;
+            $hr->company_id = $id;        
+            $hr->hr_firstname = $request->hr_firstname;
+            $hr->hr_lastname = $request->hr_lastname;
+            $hr->hr_email = $request->hr_email;
+            $hr->save();
+            return response()->json($hr);   
+        }
     }
     public function create_sv(Request $request,$id){
         $user = new User;
-        $user->username = $request->sv_username;
-        $user->password = bcrypt("changeme");
-        $user->type = "sv";
-        $user->save();
+        if (User::where('Username', '=', $request->sv_username)->exists()) {
+                // user found
+                return response()->json("Username Not Available");
+        }else{
+            $user->username = $request->sv_username;
+            $user->password = bcrypt("changeme");
+            $user->type = "sv";
+            $user->save();
 
-        $sv = new User_sv;
-        $sv->user_ID = $user->id;
-        $sv->company_id = $id;
-        $sv->department_id = $request->department_id;      
-        $sv->sv_firstname = $request->sv_firstname;
-        $sv->sv_lastname = $request->sv_lastname;
-        $sv->sv_email = $request->sv_email;
-        $sv->save();
-        return response()->json($sv);      
+            $sv = new User_sv;
+            $sv->user_ID = $user->id;
+            $sv->company_id = $id;
+            $sv->department_id = $request->department_id;      
+            $sv->sv_firstname = $request->sv_firstname;
+            $sv->sv_lastname = $request->sv_lastname;
+            $sv->sv_email = $request->sv_email;
+            $sv->save();
+            return response()->json($sv);   
+        }   
     }
     
     public function toggle_ads_visibility(Request $request,$id){

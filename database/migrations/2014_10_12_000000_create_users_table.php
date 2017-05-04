@@ -72,8 +72,7 @@ class CreateUsersTable extends Migration
             $table->string('student_course',50)->nullable();
             $table->string('student_department',50)->nullable();
             $table->string('student_institute',50)->nullable();
-            $table->string('student_school',50)->nullable();  
-            $table->string('student_pic',200)->nullable();  
+            $table->string('student_school',50)->nullable(); 
             $table->string('resume',50)->nullable()->nullable();
             $table->timestamps();
         });
