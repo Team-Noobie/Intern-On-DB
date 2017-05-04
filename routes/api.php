@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
-use App\Models\Adverstisement;
+use App\Models\Advertisement;
+
+// use Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,26 +21,107 @@ use App\Models\Adverstisement;
 // Route::get('/ads', function () {
 //     $advertisement = Adverstisement::all();
 // });
-
-
 Route::group(['prefix' => 'internon'], function(){
+    Route::post('all_ads',function(Request $request){
+        $ads = Advertisement::where('ads_title', 'LIKE', $request->search)->get();
+        return response()->json($ads);                        
+    });
     Route::post('auth','Auth\AuthController@authenticate');
-    
     Route::group(['middleware' => 'jwt.auth'], function () {
-        Route::get('auth','Auth\AuthController@getAuthenticatedUser');
+        Route::get('auth','Auth\AuthController@getAuthenticatedUser');    
+        //Guest Controller    
+        // Route::get('search_advertisement','Controllers\Guest_Controller@search_advertisement');
+        // Route::get('student_view_advertisement','Controllers\Guest_Controller@view_advertisement');        
         
-        // user
-        Route::resource('user', 'Controllers\User_Controller');
-
-        //transaction
-        Route::resource('ads', 'Controllers\Advertisement_Controller');
-        Route::resource('application','Controllers\Application_Controller');
-
-
-        //single route
-        Route::get('company_ads/{id}','Controllers\Advertisement_Controller@Company_Ads');
-        Route::get('company_show_applicants/{id}','Controllers\Application_Controller@show_applicants');
-        Route::get('student_show_applications/{id}','Controllers\Application_Controller@student_show_application');
+        // Student_Controller
+        Route::get('student_profile/{id}','Controllers\Student_Controller@student_profile');
+        Route::get('search_advertisement/{id}','Controllers\Student_Controller@search_advertisement');
+        Route::get('student_view_advertisement/{id}','Controllers\Student_Controller@view_advertisement');        
+        Route::post('apply','Controllers\Student_Controller@apply');
+        Route::get('application_list/{id}','Controllers\Student_Controller@application_list');
+        Route::get('student_schedule/{id}','Controllers\Student_Controller@student_schedule'); 
+        Route::get('student_timecard/{id}','Controllers\Student_Controller@student_timecard');                       
+        Route::post('upload_resume','Controllers\Student_Controller@upload_resume');
+        Route::post('edit_student_profile/{id}','Controllers\Student_Controller@edit_student_profile');
         
+        // Company_Controller
+        Route::get('company_profile/{id}','Controllers\Company_Controller@company_profile');
+        Route::get('company_advertisement_list/{id}','Controllers\Company_Controller@company_advertisement_list');
+        Route::post('create_advertisement','Controllers\Company_Controller@create_advertisement');
+        Route::get('company_view_advertisement/{id}','Controllers\Company_Controller@view_advertisement'); 
+        Route::get('department_list/{id}','Controllers\Company_Controller@department_list');                
+        Route::post('create_department/{id}','Controllers\Company_Controller@create_department');        
+        Route::get('hr_list/{id}','Controllers\Company_Controller@hr_list');
+        Route::post('create_hr/{id}','Controllers\Company_Controller@create_hr');                                        
+        Route::get('sv_list/{id}','Controllers\Company_Controller@sv_list');                
+        Route::post('create_sv/{id}','Controllers\Company_Controller@create_sv');
+        Route::post('toggle_ads_visibility/{id}','Controllers\Company_Controller@toggle_ads_visibility');
+        Route::post('delete_account/{id}','Controllers\Company_Controller@delete_account');
+        Route::post('edit_company_profile/{id}','Controllers\Company_Controller@edit_company_profile');
+        
+                                                
+        
+
+        //Coordinator_Controller 
+        Route::get('coordinator_profile/{id}','Controllers\Coordinator_Controller@coordinator_profile');
+        Route::post('create_student_section/{id}','Controllers\Coordinator_Controller@create_student_section');
+        Route::post('enroll_student/{id}','Controllers\Coordinator_Controller@enroll_student');
+        Route::get('section_list/{id}','Controllers\Coordinator_Controller@section_list');
+        Route::get('view_section_students/{id}','Controllers\Coordinator_Controller@view_section_students');
+        Route::post('edit_coordinator_profile/{id}','Controllers\Coordinator_Controller@edit_coordinator_profile');
+        Route::post('enroll_batch_student/{id}','Controllers\Coordinator_Controller@enroll_batch_student');
+        
+        
+
+        //Administrator_Controller
+        Route::get('administrator_module','Controllers\Administrator_Module_Controller@administrator_module');
+        Route::post('create_company_account','Controllers\Administrator_Module_Controller@create_company_account');
+        Route::post('create_coordinator_account','Controllers\Administrator_Module_Controller@create_coordinator_account');
+        Route::get('company_accounts_list','Controllers\Administrator_Module_Controller@company_accounts_list');
+        Route::get('coordinator_accounts_list','Controllers\Administrator_Module_Controller@coordinator_accounts_list');
+        
+
+        //HR_Controller
+        Route::get('hr_profile/{id}','Controllers\HR_Controller@hr_profile');
+        Route::get('company_application_list/{id}','Controllers\HR_Controller@company_application_list');
+        Route::get('get_schedules/{id}','Controllers\HR_Controller@get_schedules');    
+        Route::get('intern_list/{id}','Controllers\HR_Controller@intern_list');
+        Route::post('hire_applicant/{id}','Controllers\HR_Controller@hire_applicant');
+        Route::post('reject_application/{id}','Controllers\HR_Controller@reject_application');
+        Route::post('set_interview/{id}','Controllers\HR_Controller@set_interview');    
+        Route::post('interview_result/{id}','Controllers\HR_Controller@interview_result');
+        Route::post('update_timecard','Controllers\HR_Controller@update_timecard');
+        Route::post('edit_hr_profile/{id}','Controllers\HR_Controller@edit_hr_profile');
+        
+        //SV_Controller
+        Route::get('sv_profile/{id}','Controllers\SV_Controller@sv_profile');
+        Route::get('sv_intern_list/{id}','Controllers\SV_Controller@sv_intern_list');
+        Route::post('sv_report/{id}','Controllers\SV_Controller@sv_report'); 
+        Route::post('grade_intern','Controllers\SV_Controller@grade_intern'); 
+        Route::post('edit_sv_profile/{id}','Controllers\SV_Controller@edit_sv_profile');
+
+        // Settings    
+        Route::get('reset_password/{id}',function($id){
+                $User = User::find($id);
+                $User->password = bcrypt('changeme');
+                $User->update();
+                return response()->json('Reset');        
+        });
+        Route::post('edit_password/{id}',function(Request $request,$id){
+            $User = User::find($id);
+            if (Hash::check($request->old_password, $User->password)) {
+                $User->password = bcrypt($request->new_password);
+                $User->save();
+                return response()->json("Changed");        
+            }else{
+                return response()->json("Incorrect Old Password");                        
+            }
+        });
+
+
+        // Upload
+        Route::post('upload_pic','Controllers\Upload@upload_pic');
+        Route::post('upload_student_pic','Controllers\Upload@upload_student_pic');
+        Route::post('upload_coordinator_pic','Controllers\Upload@upload_coordinator_pic');   
     });
 });

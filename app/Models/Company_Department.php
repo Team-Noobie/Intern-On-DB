@@ -3,18 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-class Advertisement extends Model
+
+class Company_Department extends Model
 {
     //
-    protected $table = 'tbl_advertisement';
+    protected $table = 'tbl_company_departments';
     protected $primaryKey = 'id';
 
     public function Company(){
         return $this->belongsTo('App\Models\User_Company','company_id','user_ID');
     }
 
-    public function Application(){
-        return $this->hasMany('App\Models\Application','ads_id','id');
+    public function Employees(){
+        return $this->hasMany('App\Models\User_SV','department_id','id');
     }
 
+    
 }

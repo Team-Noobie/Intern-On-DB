@@ -16,7 +16,7 @@ class User extends Authenticatable
      */
     protected $table = 'tbl_user';
     protected $fillable = [ 
-        'email', 'password','type',
+        'username', 'password','type',
     ];
 
     /**
@@ -32,7 +32,20 @@ class User extends Authenticatable
     public function student(){
         return $this->hasOne('App\Models\User_Student','user_ID','id');
     }
+
     public function company(){
         return $this->hasOne('App\Models\User_Company','user_ID','id');
+    }
+
+    public function coordinator(){
+        return $this->hasOne('App\Models\User_Coordinator','user_ID','id');
+    }
+
+    public function hr(){
+        return $this->hasOne('App\Models\User_HR','user_ID','id');
+    }
+    
+    public function sv(){
+        return $this->hasOne('App\Models\User_SV','user_ID','id');
     }
 }
